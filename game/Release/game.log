@@ -1,0 +1,17 @@
+﻿  main.cpp
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(180,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(198,39): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(199,31): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(207,39): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(208,31): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(215,39): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(216,31): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(223,39): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(224,31): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\game\main.cpp(232,19): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Создание кода
+  0 of 1425 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  game.vcxproj -> C:\Users\Никита\Desktop\прога\vs\GameJam2019 v2\Release\game.exe
