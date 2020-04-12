@@ -4,8 +4,8 @@
 #include "Player.h"
 #include "Npc.h"
 #include "DrawMap.h"
-#include "imgui.h"
-#include "imgui-sfml.h"
+#include "im/imgui.h"
+#include "im/imgui-sfml.h"
 #define HeroX 50
 #define HeroY 50
 #define ScreenX 1024
