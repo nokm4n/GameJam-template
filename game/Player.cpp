@@ -101,3 +101,26 @@ void Player::Collision(std::string map[34], int Height, int Width)
 			
 		}
 }
+
+bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
+{
+//	std::cout << *Domi << "/" <<*Domj << std::endl;
+	for(int i=0; i<MapSize; i++)
+		for (int j = 0; j < MapSize; j++)
+		{
+			//std::cout << i * 1200 << "/" << i * 1200+1000 << std::endl;
+			if (x > (i * 1200-50) && x<(i * 1200 + 1000) && y>(j * 1200-50) && y < (j * 1200 + 1000))
+			{
+				*Outside = false;
+				std::cout << "hi";
+				*Domi = i;
+				*Domj = j;
+				return true;
+			}
+			else
+				*Outside = true;
+		}
+	return false;
+	
+}
+

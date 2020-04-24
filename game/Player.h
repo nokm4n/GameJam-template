@@ -20,6 +20,7 @@ public:
 	void Collision(std::string[], int, int);
 	float getplayercoordinateX();
 	float getplayercoordinateY();
+	bool PlayerInside(int, int*, int*, bool*);
 	Player(String, float, float, float, float);
 	~Player();
 };

@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <windows.h>
 #include <sstream>
 #include "Player.h"
 #include "Npc.h"
@@ -170,7 +171,8 @@ int main()
 	window.setTitle(windowTitle);
 	////////////////////////////////////////////////////Im GUi
 
-
+	bool Outside = false;
+	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
 	int perem[3] = {0, 0, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
 
 	while (window.isOpen())
@@ -227,11 +229,24 @@ int main()
 					CurrentFrame = 0;
 				player.sprite.setTextureRect(IntRect(HeroX*int(CurrentFrame), HeroY *0, HeroX, HeroY));
 			}
-			float dX = pos.x - player.getplayercoordinateX();//вектор , колинеарный прямой, которая пересекает спрайт и курсор
+			
+			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
+			{
+				mapp.ChangeDom(3, DomJ*12, DomI*12);
+			}
+			if(Outside)
+			{
+				cout << "outside" << endl;
+				mapp.ChangeDom(1, DomJ * 12, DomI * 12);
+			}
+			else
+				cout << "inside" << endl;
+
+	/*		float dX = pos.x - player.getplayercoordinateX();//вектор , колинеарный прямой, которая пересекает спрайт и курсор
 			float dY = pos.y - player.getplayercoordinateY();//он же, координата y
 			float rotation = (atan2(dY, dX)) * 180 / 3.14159265;//получаем угол в радианах и переводим его в градусы
 			player.sprite.setRotation(rotation);//поворачиваем спрайт на эти градусы
-			////////////////////////////////////////////////////Im GUi
+			////////////////////////////////////////////////////Im GUi*/
 			
 
 			ImGui::SFML::Update(window, clock.restart());
@@ -265,7 +280,7 @@ int main()
 			ImGui::End(); // end window
 			////////////////////////////////////////////////////Im GUi
 
-
+			
 
 
 			
