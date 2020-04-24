@@ -17,6 +17,9 @@ DrawMap::DrawMap(string map)
 		l++;
 
 	}
+	for (int i = 0; i < 34; i++)
+		CopyMap[i] = tempString[i];
+
 	std::ifstream files("d.txt");  /////////////заполнение рандомного дома
 	while (!files.eof())
 	{
@@ -33,6 +36,21 @@ void DrawMap::ChangeDom(int ChangeDom, int startI, int startJ)
 	/////////////////////////////////////////////замена дома на рандомный дом
 //	int random = rand() % 2;
 //	cout << random;
+
+
+	if (ChangeDom == 10)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{tempString[i + startI][j + startJ] = CopyMap[i + startI][j + startJ];
+				
+			}
+
+		}
+		
+	}
+	else
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
@@ -40,6 +58,15 @@ void DrawMap::ChangeDom(int ChangeDom, int startI, int startJ)
 			tempString[i+startI][j+startJ] = randDom[i][10 * ChangeDom + j];
 		}
 
+	}
+}
+
+
+void DrawMap::AddToCopy()
+{
+	for (int i = 0; i < 34; i++)
+	{
+		CopyMap[i] = tempString[i];
 	}
 }
 

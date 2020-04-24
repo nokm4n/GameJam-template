@@ -236,11 +236,11 @@ int main()
 			}
 			if(Outside)
 			{
-				cout << "outside" << endl;
-				mapp.ChangeDom(1, DomJ * 12, DomI * 12);
+				mapp.ChangeDom(10, DomJ * 12, DomI * 12);
 			}
-			else
-				cout << "inside" << endl;
+
+
+
 
 	/*		float dX = pos.x - player.getplayercoordinateX();//вектор , колинеарный прямой, которая пересекает спрайт и курсор
 			float dY = pos.y - player.getplayercoordinateY();//он же, координата y
@@ -274,7 +274,7 @@ int main()
 			if (ImGui::Button("Change dom"))
 			{
 				mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
-				
+				mapp.AddToCopy();
 			}
 
 			ImGui::End(); // end window

@@ -112,7 +112,7 @@ bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
 			if (x > (i * 1200-50) && x<(i * 1200 + 1000) && y>(j * 1200-50) && y < (j * 1200 + 1000))
 			{
 				*Outside = false;
-				std::cout << "hi";
+			//	std::cout << "hi";
 				*Domi = i;
 				*Domj = j;
 				return true;
