@@ -7,8 +7,8 @@
 #include "DrawMap.h"
 #include "im/imgui.h"
 #include "im/imgui-sfml.h"
-#define HeroX 50
-#define HeroY 50
+#define HeroX 50 //hero tile size X
+#define HeroY 50 //hero tile size Y
 #define ScreenX 1024
 #define ScreenY 720
 #define TILE 100
@@ -26,117 +26,7 @@ void getplayercoordinateforview(float x, float y)
 {
 	view.setCenter(x, y);
 }
-/*
-void menu(RenderWindow & window) {
-	Texture menuTexture1, menuTexture2, menuTexture3, aboutTexture, menuBackground;
-	menuTexture1.loadFromFile("images/play2.png");
-	menuTexture2.loadFromFile("images/exit2.png");
-	menuBackground.loadFromFile("images/LoGo.png");
-	Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture), menuBg(menuBackground);
-	bool isMenu = 1;
-	int menuNum = 0;
-	menu1.setPosition(100, 60);
-	menu2.setPosition(100, 120);
-	menuBg.setPosition(0, 0);
 
-	//////////////////////////////МЕНЮ///////////////////
-	while (isMenu)
-	{
-		menuNum = 0;
-		window.clear(Color(129, 181, 221));
-
-		if (IntRect(100, 60, 300, 50).contains(Mouse::getPosition(window)))
-		{
-			menu1.setColor(Color::Blue);
-			menuNum = 1;
-		}
-		else
-		{
-			menu1.setColor(Color::White);
-		}
-		if (IntRect(100, 120, 300, 50).contains(Mouse::getPosition(window)))
-		{
-			menu2.setColor(Color::Blue);
-			menuNum = 2;
-		}
-		else
-		{
-			menu2.setColor(Color::White);
-		}
-
-		if (Mouse::isButtonPressed(Mouse::Left))
-		{
-			if (menuNum == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню 
-			if (menuNum == 2) { window.close(); isMenu = false; }
-
-		}
-
-		window.draw(menuBg);
-		window.draw(menu1);
-		window.draw(menu2);
-
-		window.display();
-	}
-	////////////////////////////////////////////////////
-}
-
-void pause(RenderWindow & window) {
-	Texture menuTexture1, menuTexture2, menuTexture3, aboutTexture, menuBackground;
-	menuTexture1.loadFromFile("images/play2.png");
-	menuTexture2.loadFromFile("images/exit2.png");
-	menuBackground.loadFromFile("images/LoGo.png");
-	Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture), menuBg(menuBackground);
-	bool isMenu = 1;
-	int menuNum = 0;
-	menu1.setPosition(-833, -520);
-	menu2.setPosition(-833, -470);
-	menuBg.setPosition(-960, -539);
-	view.setCenter(0, 0);
-
-	//////////////////////////////МЕНЮ///////////////////
-	while (isMenu)
-	{
-		window.clear();
-		window.setView(view);
-		menuNum = 0;
-		window.clear(Color(129, 181, 221));
-
-		if (IntRect(100, 60, 300, 50).contains(Mouse::getPosition(window)))
-		{
-			menu1.setColor(Color::Blue);
-			menuNum = 1;
-		}
-		else
-		{
-			menu1.setColor(Color::White);
-		}
-		if (IntRect(100, 120, 300, 50).contains(Mouse::getPosition(window)))
-		{
-			menu2.setColor(Color::Blue);
-			menuNum = 2;
-		}
-		else
-		{
-			menu2.setColor(Color::White);
-		}
-
-		if (Mouse::isButtonPressed(Mouse::Left))
-		{
-			if (menuNum == 1) isMenu = false;
-			if (menuNum == 2) { window.close(); isMenu = false; }
-
-		}
-
-		window.draw(menuBg);
-		window.draw(menu1);
-		window.draw(menu2);
-
-		window.display();
-	}
-	////////////////////////////////////////////////////
-}
-
-*/
 
 
 int main()
@@ -162,7 +52,7 @@ int main()
 	DrawMap mapp("karta.txt");
 	//menu(window);
 	
-	
+	Npc npc("hero.png", 1100, 1100, HeroX, HeroY);
 
 	////////////////////////////////////////////////////Im GUi
 	sf::Color bgColor;
@@ -174,7 +64,7 @@ int main()
 	bool Outside = false;
 	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
 	int perem[3] = {0, 0, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
-
+	npc.speed = 0.3;
 	while (window.isOpen())
 	{
 		Vector2i pixelPos = Mouse::getPosition(window);//забираем коорд курсора
@@ -198,36 +88,27 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::A))
 			{
 				player.dir = 1; player.speed = 0.6;
-				CurrentFrame += 0.005*time;
+				player.CurrentFrame += 0.005*time;
 
-				if (CurrentFrame > 4)
-					CurrentFrame = 0;
-				player.sprite.setTextureRect(IntRect(HeroX*int(CurrentFrame), HeroY, HeroX, HeroY));
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D))
 			{
 				player.dir = 2; player.speed = 0.6;
-				CurrentFrame += 0.005*time;
-				if (CurrentFrame > 4)
-					CurrentFrame = 0;
-				player.sprite.setTextureRect(IntRect(HeroX*int(CurrentFrame), HeroY*2, HeroX, HeroY));
+				player.CurrentFrame += 0.005*time;
+				
 			}
 			if (Keyboard::isKeyPressed(Keyboard::W))
 			{
 				player.dir = 3; player.speed = 0.6;
-				CurrentFrame += 0.005*time;
-				if (CurrentFrame > 4)
-					CurrentFrame = 0;
-				player.sprite.setTextureRect(IntRect(HeroX*int(CurrentFrame), HeroY*3, HeroX, HeroY));
+				player.CurrentFrame += 0.005*time;
+				
 			}
 			if (Keyboard::isKeyPressed(Keyboard::S))
 			{
 				player.dir = 4; player.speed = 0.6;
-				CurrentFrame += 0.005*time;
+				player.CurrentFrame += 0.005*time;
 	
-				if (CurrentFrame > 4)
-					CurrentFrame = 0;
-				player.sprite.setTextureRect(IntRect(HeroX*int(CurrentFrame), HeroY *0, HeroX, HeroY));
+				
 			}
 			
 			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
@@ -253,10 +134,8 @@ int main()
 
 			ImGui::Begin("Sample window"); // создаём окно
 
-			// Инструмент выбора цвета
 			if (ImGui::ColorEdit3("Background color", color)) {
-				// код вызывается при изменении значения, поэтому всё
-				// обновляется автоматически
+
 				bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
 				bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
 				bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
@@ -284,13 +163,18 @@ int main()
 
 
 			
-			getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
-			player.Move(time, mapp.tempString, HEIGHT_MAP, WIDTH_MAP);
-			window.setView(view);
-			window.clear();
+		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
+		player.Move(time, mapp.tempString, HEIGHT_MAP, WIDTH_MAP);
+		npc.IIMove(mapp.CopyMap, 10, 5);
+		npc.Move(time, 0.2);
 
-			mapp.Drawsprite(window, s_map); //////////risovka karti
-			
+
+		window.setView(view);
+		window.clear();
+
+		mapp.Drawsprite(window, s_map); //////////risovka karti
+
+		window.draw(npc.sprite);
 		window.draw(player.sprite);
 		ImGui::SFML::Render(window);
 		window.display();

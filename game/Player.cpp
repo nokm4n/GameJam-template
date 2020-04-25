@@ -13,19 +13,33 @@ void Player::Move(float time, std::string map[25], int height, int width)
 	
 	switch (dir)
 	{
-	case 1:
+	case 1: // влево
+
+		if (CurrentFrame > 4)
+			CurrentFrame = 0;
+		sprite.setTextureRect(IntRect(HeroX * int(CurrentFrame), HeroY, HeroX, HeroY));
+
 		dx = -speed;
 		dy = 0;
 		break;
-	case 2:
+	case 2: // вправо
+		if (CurrentFrame > 4)
+			CurrentFrame = 0;
+		sprite.setTextureRect(IntRect(HeroX * int(CurrentFrame), HeroY * 2, HeroX, HeroY));
 		dx = speed;
 		dy = 0;
 		break;
-	case 3:
+	case 3://вниз
+		if (CurrentFrame > 4)
+			CurrentFrame = 0;
+		sprite.setTextureRect(IntRect(HeroX * int(CurrentFrame), HeroY * 3, HeroX, HeroY));
 		dy = -speed;
 		dx = 0;
 		break;
-	case 4:
+	case 4: // вверх
+		if (CurrentFrame > 4)
+			CurrentFrame = 0;
+		sprite.setTextureRect(IntRect(HeroX * int(CurrentFrame), HeroY * 0, HeroX, HeroY));
 		dy = speed;
 		dx = 0;
 		break;
@@ -104,15 +118,13 @@ void Player::Collision(std::string map[34], int Height, int Width)
 
 bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
 {
-//	std::cout << *Domi << "/" <<*Domj << std::endl;
+
 	for(int i=0; i<MapSize; i++)
 		for (int j = 0; j < MapSize; j++)
 		{
-			//std::cout << i * 1200 << "/" << i * 1200+1000 << std::endl;
 			if (x > (i * 1200-50) && x<(i * 1200 + 1000) && y>(j * 1200-50) && y < (j * 1200 + 1000))
 			{
 				*Outside = false;
-			//	std::cout << "hi";
 				*Domi = i;
 				*Domj = j;
 				return true;

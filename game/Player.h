@@ -15,13 +15,15 @@ public:
 	Sprite sprite;
 	float dx, dy, w, h, speed;
 
-	int dir;
+	float CurrentFrame = 0;
+
+	int dir; // 1-left 2-right 3-down 4-up
 	void Move(float, std::string[], int, int);
 	void Collision(std::string[], int, int);
 	float getplayercoordinateX();
 	float getplayercoordinateY();
-	bool PlayerInside(int, int*, int*, bool*);
-	Player(String, float, float, float, float);
+	bool PlayerInside(int MapSize, int* DomX, int* DomY, bool* Outside);
+	Player(String File, float PositionX, float PositionY, float ModelW, float ModelH);
 	~Player();
 };
 
