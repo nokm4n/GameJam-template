@@ -21,6 +21,8 @@ Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 	sprite.setTextureRect(IntRect(32, 48, w, h));
 	LocationNpcX = x / 100;
 	LocationNpcY = y / 100;
+	TargetX = LocationNpcX;
+	TargetY = LocationNpcY;
 	for (int i = 0; i < 34; i++)
 		for (int j = 0; j < 34; j++)
 		{
@@ -76,12 +78,11 @@ void Npc::IsActive(float time, float speed, std::string* map)
 		dx = 0;
 		break;
 	}
-	
+	IIMove(TargetX, TargetY);
 	x += dx * time;
 	y += dy * time;
 	Collision(map);
 	speed = dx = dy = 0;
-
 	sprite.setPosition(x, y);
 }
 
@@ -130,6 +131,9 @@ void Npc::WayPointsMove(int *CountPoints, int **Targets)
 
 void Npc::IIMove(int Xpos, int Ypos)
 {
+	std::cout << TargetX << " " << TargetY << std::endl;
+	TargetX = Xpos;
+	TargetY = Ypos;
 	if (LocationNpcX <Xpos)
 	{
 		dir = 2;
@@ -199,7 +203,7 @@ void Npc::FindWay(int Ypos, int Xpos)
 		}
 	}
 
-	for (int i = 0; i < 34; i++)
+/*	for (int i = 0; i < 34; i++)
 	{
 		for (int j = 0; j < 34; j++)
 		{
@@ -218,7 +222,7 @@ void Npc::FindWay(int Ypos, int Xpos)
 				std::cout << 0 << MapCheck[i][j] << " ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 	
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено
 	{

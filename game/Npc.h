@@ -18,6 +18,7 @@ public:
 	Image image;
 	Texture texture;
 	Sprite sprite;
+	int TargetX = LocationNpcX, TargetY = LocationNpcY;
 	int  MapCheck[34][34];
 	void IsActive(float time , float speed, std::string* map);
 	void Collision(std::string[]);
