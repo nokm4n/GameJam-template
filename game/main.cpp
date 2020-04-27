@@ -52,19 +52,33 @@ int main()
 	DrawMap mapp("karta.txt");
 	//menu(window);
 	
-	Npc npc("hero.png", 1100, 1100, HeroX, HeroY);
-
-	////////////////////////////////////////////////////Im GUi
-	sf::Color bgColor;
-	float color[3] = { 0.f, 0.f, 0.f };
-	char windowTitle[255] = "ImGui + SFML = <3";
-	window.setTitle(windowTitle);
-	////////////////////////////////////////////////////Im GUi
+	Npc npc("hero.png", 1100, 1100, HeroX, HeroY, mapp.tempString);
 
 	bool Outside = false;
+	bool flagOutside = true;
+	int CounterWayPoints = 5; //Количество вэйпоинтов
+	 // массив вейпоинтов
+	int** WayPoints = new int* [5];
+	for (int i = 0; i < 5; i++)
+		WayPoints[i] = new int[2];
+
+
+
+
+	WayPoints[0][0] = 10;
+	WayPoints[0][1] = 10;
+	WayPoints[1][0] = 15;
+	WayPoints[1][1] = 15;
+	WayPoints[2][0] = 10;
+	WayPoints[2][1] = 10;
+	WayPoints[3][0] = 15;
+	WayPoints[3][1] = 15;
+	WayPoints[4][0] = 10;
+	WayPoints[4][1] = 10;
+
+
 	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
 	int perem[3] = {0, 0, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
-	npc.speed = 0.3;
 	while (window.isOpen())
 	{
 		Vector2i pixelPos = Mouse::getPosition(window);//забираем коорд курсора
@@ -110,16 +124,17 @@ int main()
 	
 				
 			}
-			
-			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
+			if (flagOutside)
 			{
-				mapp.ChangeDom(3, DomJ*12, DomI*12);
+				if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
+				{
+					mapp.ChangeDom(3, DomJ * 12, DomI * 12);
+				}
+				if (Outside)
+				{
+					mapp.ChangeDom(10, DomJ * 12, DomI * 12);
+				}
 			}
-			if(Outside)
-			{
-				mapp.ChangeDom(10, DomJ * 12, DomI * 12);
-			}
-
 
 
 
@@ -134,40 +149,39 @@ int main()
 
 			ImGui::Begin("Sample window"); // создаём окно
 
-			if (ImGui::ColorEdit3("Background color", color)) {
-
-				bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
-				bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
-				bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
+			if (ImGui::Button("Inside/Outside on/off"))
+			{
+				flagOutside = !flagOutside;
 			}
 
-			ImGui::InputText("Window title", windowTitle, 255);
-
-			if (ImGui::Button("Update window title")) {
-				// этот код выполняется, когда юзер жмёт на кнопку
-				// здесь можно было бы написать 
-				// if(ImGui::InputText(...))
-				window.setTitle(windowTitle);
+			if (ImGui::Button("My Coord")) 
+			{
+				cout << player.getplayercoordinateX() / 100 << " " << player.getplayercoordinateY() / 100 << endl;
 			}
+			if (ImGui::Button("Bot Coord"))
+			{
+				cout << npc.getplayercoordinateX()/100 << " " << npc.getplayercoordinateY() / 100 << endl;
+			}
+
 			ImGui::InputInt3("number house", perem); ///// первая переменная номер дома, вторая и третья квадраты
 			if (ImGui::Button("Change dom"))
 			{
 				mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 				mapp.AddToCopy();
+				npc.FindWay(17, 17);
 			}
 
 			ImGui::End(); // end window
 			////////////////////////////////////////////////////Im GUi
-
-			
-
-
-			
+		//	
+		//	npc.WayPointsMove(&CounterWayPoints, WayPoints);
+	//	npc.FindWay(player.getplayercoordinateX()/100, player.getplayercoordinateY()/100);
+		
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
-		player.Move(time, mapp.tempString, HEIGHT_MAP, WIDTH_MAP);
-		npc.IIMove(mapp.CopyMap, 10, 5);
-		npc.Move(time, 0.2);
-
+		player.Move(time, mapp.tempString);
+		
+	//	npc.WayPointsMove(&CounterWayPoints, Targets);
+		npc.IsActive(time, 0.2);
 
 		window.setView(view);
 		window.clear();

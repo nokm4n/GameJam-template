@@ -18,8 +18,8 @@ public:
 	float CurrentFrame = 0;
 
 	int dir; // 1-left 2-right 3-down 4-up
-	void Move(float, std::string[], int, int);
-	void Collision(std::string[], int, int);
+	void Move(float, std::string[]);
+	void Collision(std::string[]);
 	float getplayercoordinateX();
 	float getplayercoordinateY();
 	bool PlayerInside(int MapSize, int* DomX, int* DomY, bool* Outside);

@@ -18,9 +18,13 @@ public:
 	Image image;
 	Texture texture;
 	Sprite sprite;
-	void Move(float time , float speed);
-	void IIMove(std::string*, int, int);
-	Npc(String File, float PositionX, float PositionY, float ModelW, float ModelH);
+	int  MapCheck[34][34];
+	void IsActive(float time , float speed);
+	void FindWay(int Xpos, int Ypos);
+	void IIMove(int Xpos, int Ypos);
+	void HelpMove(int way, int x, int y);
+	void WayPointsMove(int* CountPoints, int **Positions);
+	Npc(String File, float PositionX, float PositionY, float ModelW, float ModelH, std::string* map);
 	~Npc();
 
 	float getplayercoordinateX();
