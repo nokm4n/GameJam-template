@@ -2,6 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <Windows.h>
+#define HeroX 50
+#define HeroY 50
+#define TILE 100
+
 
 Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 {
@@ -35,7 +39,7 @@ Npc::~Npc()
 }
 
 
-void Npc::IsActive(float time, float speed)
+void Npc::IsActive(float time, float speed, std::string* map)
 {
 	LocationNpcX = x / 100;
 	LocationNpcY = y / 100;
@@ -75,6 +79,7 @@ void Npc::IsActive(float time, float speed)
 	
 	x += dx * time;
 	y += dy * time;
+	Collision(map);
 	speed = dx = dy = 0;
 
 	sprite.setPosition(x, y);
@@ -218,9 +223,7 @@ void Npc::FindWay(int Ypos, int Xpos)
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено
 	{
 		std::cout << "FF ";
-	//	std::cout << MapCheck[Ypos][Xpos];
-		HelpMove(MapCheck[Ypos][Xpos], Ypos, Xpos);
-	//IIMove(Xpos, Ypos);
+	//	HelpMove(MapCheck[Ypos][Xpos], Ypos, Xpos);
 	}
 	else//решение не найдено
 	{
@@ -289,4 +292,39 @@ void Npc::HelpMove(int way, int Ypos, int Xpos)
 		}
 		
 	}*/
+}
+
+
+
+void Npc::Collision(std::string map[34])
+{
+	for (int i = y / TILE; i < (y + HeroY) / TILE; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
+		for (int j = x / TILE; j < (x + HeroX) / TILE; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
+		{
+			if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
+			{
+				if (dy > 0)//если мы шли вниз,
+				{
+					y = i * TILE - HeroY;//то стопорим координату игрек персонажа. сначала получаем координату нашего квадратика на карте(стены) и затем вычитаем из высоты спрайта персонажа.
+				//	y -= HeroY/20;
+				}
+				if (dy < 0)
+				{
+					y = i * TILE + HeroY * 2;//аналогично с ходьбой вверх. dy<0, значит мы идем вверх (вспоминаем координаты паинта)
+				//	y += HeroY/20;
+				}
+				if (dx > 0)
+				{
+					//	x -= HeroX/20;
+					x = j * TILE - HeroX;//если идем вправо, то координата Х равна стена (символ 0) минус ширина персонажа
+				}
+				if (dx < 0)
+				{
+					//	x += HeroX/20;
+					x = j * TILE + HeroX * 2;//аналогично идем влево
+				}
+
+			}
+
+		}
 }

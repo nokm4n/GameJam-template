@@ -58,6 +58,9 @@ int main()
 	bool flagOutside = true;
 	int CounterWayPoints = 5; //Количество вэйпоинтов
 	 // массив вейпоинтов
+
+	int BotCoord[2] = { 0, 0 };
+
 	int** WayPoints = new int* [5];
 	for (int i = 0; i < 5; i++)
 		WayPoints[i] = new int[2];
@@ -94,47 +97,45 @@ int main()
 				window.close();
 			
 		}
-			if (Keyboard::isKeyPressed(Keyboard::Escape))
-			{
-				window.close();
-				//pause(window);
-			}
-			if (Keyboard::isKeyPressed(Keyboard::A))
-			{
-				player.dir = 1; player.speed = 0.6;
-				player.CurrentFrame += 0.005*time;
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			window.close();
+			//pause(window);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::A))
+		{
+			player.dir = 1; player.speed = 0.6;
+			player.CurrentFrame += 0.005*time;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D))
+		{
+			player.dir = 2; player.speed = 0.6;
+			player.CurrentFrame += 0.005*time;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::W))
+		{
+			player.dir = 3; player.speed = 0.6;
+			player.CurrentFrame += 0.005*time;
+			
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S))
+		{
+			player.dir = 4; player.speed = 0.6;
+			player.CurrentFrame += 0.005*time;
 
-			}
-			if (Keyboard::isKeyPressed(Keyboard::D))
+			
+		}
+		if (flagOutside)
+		{
+			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
 			{
-				player.dir = 2; player.speed = 0.6;
-				player.CurrentFrame += 0.005*time;
-				
+				mapp.ChangeDom(3, DomJ * 12, DomI * 12);
 			}
-			if (Keyboard::isKeyPressed(Keyboard::W))
+			if (Outside)
 			{
-				player.dir = 3; player.speed = 0.6;
-				player.CurrentFrame += 0.005*time;
-				
+				mapp.ChangeDom(10, DomJ * 12, DomI * 12);
 			}
-			if (Keyboard::isKeyPressed(Keyboard::S))
-			{
-				player.dir = 4; player.speed = 0.6;
-				player.CurrentFrame += 0.005*time;
-	
-				
-			}
-			if (flagOutside)
-			{
-				if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
-				{
-					mapp.ChangeDom(3, DomJ * 12, DomI * 12);
-				}
-				if (Outside)
-				{
-					mapp.ChangeDom(10, DomJ * 12, DomI * 12);
-				}
-			}
+		}
 
 
 
@@ -145,44 +146,46 @@ int main()
 			////////////////////////////////////////////////////Im GUi*/
 			
 
-			ImGui::SFML::Update(window, clock.restart());
+		ImGui::SFML::Update(window, clock.restart());
+		ImGui::Begin("Sample window"); // создаём окно
+		if (ImGui::Button("Inside/Outside on/off"))
+		{
+			flagOutside = !flagOutside;
+		}
 
-			ImGui::Begin("Sample window"); // создаём окно
+		if (ImGui::Button("My Coord")) 
+		{
+			cout << player.getplayercoordinateX() / 100 << " " << player.getplayercoordinateY() / 100 << endl;
+		}
+		if (ImGui::Button("Bot Coord"))
+		{
+			cout << npc.getplayercoordinateX()/100 << " " << npc.getplayercoordinateY() / 100 << endl;
+		}
+		if (ImGui::Button("Test"))
+		{
+			npc.FindWay(17, 17);
+		}
 
-			if (ImGui::Button("Inside/Outside on/off"))
-			{
-				flagOutside = !flagOutside;
-			}
-
-			if (ImGui::Button("My Coord")) 
-			{
-				cout << player.getplayercoordinateX() / 100 << " " << player.getplayercoordinateY() / 100 << endl;
-			}
-			if (ImGui::Button("Bot Coord"))
-			{
-				cout << npc.getplayercoordinateX()/100 << " " << npc.getplayercoordinateY() / 100 << endl;
-			}
-
-			ImGui::InputInt3("number house", perem); ///// первая переменная номер дома, вторая и третья квадраты
-			if (ImGui::Button("Change dom"))
-			{
-				mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
-				mapp.AddToCopy();
-				npc.FindWay(17, 17);
-			}
-
-			ImGui::End(); // end window
-			////////////////////////////////////////////////////Im GUi
-		//	
-		//	npc.WayPointsMove(&CounterWayPoints, WayPoints);
-	//	npc.FindWay(player.getplayercoordinateX()/100, player.getplayercoordinateY()/100);
+		ImGui::InputInt3("number house", perem); ///// первая переменная номер дома, вторая и третья квадраты
+		if (ImGui::Button("Change dom"))
+		{
+			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
+			mapp.AddToCopy();
+		}
+		ImGui::InputInt2("Bot movement coord", BotCoord);
+		if (ImGui::Button("Bot start"))
+		{
+			npc.IIMove(BotCoord[0], BotCoord[1]);
+		
+		}
+		ImGui::End(); // end window
+		////////////////////////////////////////////////////Im GUi	
 		
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
 		
-	//	npc.WayPointsMove(&CounterWayPoints, Targets);
-		npc.IsActive(time, 0.2);
-
+	
+		npc.IsActive(time, 0.2, mapp.CopyMap);
 		window.setView(view);
 		window.clear();
 

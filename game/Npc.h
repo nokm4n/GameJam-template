@@ -19,7 +19,8 @@ public:
 	Texture texture;
 	Sprite sprite;
 	int  MapCheck[34][34];
-	void IsActive(float time , float speed);
+	void IsActive(float time , float speed, std::string* map);
+	void Collision(std::string[]);
 	void FindWay(int Xpos, int Ypos);
 	void IIMove(int Xpos, int Ypos);
 	void HelpMove(int way, int x, int y);
