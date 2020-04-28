@@ -23,6 +23,8 @@ Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 	LocationNpcY = y / 100;
 	TargetX = LocationNpcX;
 	TargetY = LocationNpcY;
+
+
 	for (int i = 0; i < 34; i++)
 		for (int j = 0; j < 34; j++)
 		{
@@ -48,7 +50,7 @@ void Npc::IsActive(float time, float speed, std::string* map)
 	switch (dir)
 	{
 	case 1: // влево
-
+		std::cout << CurrentFrame << " ";
 		if (CurrentFrame > 4)
 			CurrentFrame = 0;
 		sprite.setTextureRect(IntRect(NpcX * int(CurrentFrame), NpcY, NpcX, NpcY));
@@ -57,6 +59,7 @@ void Npc::IsActive(float time, float speed, std::string* map)
 		dy = 0;
 		break;
 	case 2: // вправо
+		std::cout << CurrentFrame << " ";
 		if (CurrentFrame > 4)
 			CurrentFrame = 0;
 		sprite.setTextureRect(IntRect(NpcX * int(CurrentFrame), NpcY * 2, NpcX, NpcY));
@@ -78,9 +81,10 @@ void Npc::IsActive(float time, float speed, std::string* map)
 		dx = 0;
 		break;
 	}
-	IIMove(TargetX, TargetY);
+	CurrentFrame += 0.005 * time;
 	x += dx * time;
 	y += dy * time;
+	IIMove(TargetY, TargetX);
 	Collision(map);
 	speed = dx = dy = 0;
 	sprite.setPosition(x, y);
@@ -129,9 +133,12 @@ void Npc::WayPointsMove(int *CountPoints, int **Targets)
 	}
 }
 
-void Npc::IIMove(int Xpos, int Ypos)
+
+
+
+void Npc::IIMove(int Ypos, int Xpos)
 {
-	std::cout << TargetX << " " << TargetY << std::endl;
+	//std::cout << TargetX << " " << TargetY << std::endl;
 	TargetX = Xpos;
 	TargetY = Ypos;
 	if (LocationNpcX <Xpos)
@@ -165,10 +172,9 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 	while (add == true)
 	{
-		add = false;
-		for (int i = 0; i < 34; i++)
+		for (int i = 1; i < 33; i++)
 		{
-			for (int j = 0; j < 34; j++)
+			for (int j = 1; j < 33; j++)
 			{
 				if (MapCheck[i][j] == step1)
 				{
@@ -188,14 +194,13 @@ void Npc::FindWay(int Ypos, int Xpos)
 					{
 						MapCheck[i + 1][j] = step1 + 1;
 					}
-
+					
 				}
 
 			}
 			
 		}
 		step1++;
-		add = true;
 		if (MapCheck[Ypos][Xpos] != -1 || step1 > 34 * 10)
 		{
 			add = false;
@@ -226,8 +231,31 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено
 	{
-		std::cout << "FF ";
-	//	HelpMove(MapCheck[Ypos][Xpos], Ypos, Xpos);
+		int xx = Xpos, yy = Ypos;
+		for (int i = 0; i < MapCheck[Ypos][Xpos]; i++)
+		{
+			if (MapCheck[yy][xx - 1] == MapCheck[Ypos][Xpos] - i)
+			{
+				MapCheck[yy][xx - 1] = 0;
+				xx--;
+			}
+			if (MapCheck[yy][xx + 1] == MapCheck[Ypos][Xpos] - i)
+			{
+				MapCheck[yy][xx + 1] = 0;
+				xx++;
+			}
+			if (MapCheck[yy - 1][xx] == MapCheck[Ypos][Xpos] - i)
+			{
+				MapCheck[yy - 1][xx] = 0;
+				yy--;
+			}
+			if (MapCheck[yy + 1][xx] == MapCheck[Ypos][Xpos] - i)
+			{
+				MapCheck[yy + 1][xx] = 0;
+				yy++;
+			}
+		}
+	HelpMove(MapCheck[Ypos][Xpos], Ypos, Xpos);
 	}
 	else//решение не найдено
 	{
@@ -241,60 +269,57 @@ void Npc::FindWay(int Ypos, int Xpos)
 void Npc::HelpMove(int way, int Ypos, int Xpos)
 {
 
-	//while(Sway>0)
-	//WayPointsMove(&Sway, WayPoints);
+	if (MapCheck[LocationNpcY][LocationNpcX - 1] == 0)
+	{
+
+		TargetY = LocationNpcY;
+		TargetX = LocationNpcX - 1;
+
+		MapCheck[LocationNpcY][LocationNpcX] = -2;
+	}
+	else
+		if (MapCheck[LocationNpcY][LocationNpcX + 1] == 0)
+		{
+			TargetY = LocationNpcY;
+			TargetX = LocationNpcX + 1;
+
+			MapCheck[LocationNpcY][LocationNpcX] = -2;
+		}
+		else
+			if (MapCheck[LocationNpcY - 1][LocationNpcX] == 0)
+			{
+				TargetX = LocationNpcX;
+				TargetY = LocationNpcY - 1;
+
+				MapCheck[LocationNpcY][LocationNpcX] = -2;
+			}
+			else
+				if (MapCheck[LocationNpcY + 1][LocationNpcX] == 0)
+				{
+					TargetX = LocationNpcX;
+					TargetY = LocationNpcY + 1;
+					MapCheck[LocationNpcY][LocationNpcX] = -2;
+				}
+
 	/*for (int i = 0; i < 34; i++)
 	{
 		for (int j = 0; j < 34; j++)
 		{
 			if (i == Ypos && j == Xpos)
 			{
-				std::cout <<  "FF ";
+				std::cout << "FF ";
 				continue;
 			}
 			if (MapCheck[i][j] < 0)
 			{
-				std::cout << 9 << 9 << " ";
+				std::cout << "## ";
 			}
-			else if (MapCheck[i][j]>9)
-			std::cout << MapCheck[i][j] << " ";
+			else if (MapCheck[i][j] > 9)
+				std::cout << MapCheck[i][j] << " ";
 			else
-				std::cout << 0 << MapCheck[i][j]  << " ";
+				std::cout << 0 << MapCheck[i][j] << " ";
 		}
 		std::cout << std::endl;
-	}*/
-	/*
-	for (int i = tempway; i > 0; i--)
-	{
-		if (MapCheck[LocationNpcY][LocationNpcX - 1] == 0)
-		{
-			std::cout << "not;";
-			
-			IIMove(LocationNpcY, LocationNpcX - 1);
-			MapCheck[LocationNpcY][LocationNpcX - 1] = -1;
-		}
-		if (MapCheck[LocationNpcY][LocationNpcX + 1] == 0)
-		{
-			std::cout << "not;";
-			
-			IIMove(LocationNpcY, LocationNpcX + 1);
-			MapCheck[LocationNpcY][LocationNpcX + 1] = -1;
-		}
-		if (MapCheck[LocationNpcY - 1][LocationNpcX] == 0)
-		{
-			std::cout << "not;";
-			
-			IIMove(LocationNpcY - 1, LocationNpcX);
-			MapCheck[LocationNpcY - 1][LocationNpcX] = -1;
-		}
-		if (MapCheck[LocationNpcY + 1][LocationNpcX] == 0)
-		{
-			std::cout << "not;";
-		
-			IIMove(LocationNpcY + 1, LocationNpcX);
-			MapCheck[LocationNpcY + 1][LocationNpcX] = -1;
-		}
-		
 	}*/
 }
 

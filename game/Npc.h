@@ -22,8 +22,8 @@ public:
 	int  MapCheck[34][34];
 	void IsActive(float time , float speed, std::string* map);
 	void Collision(std::string[]);
-	void FindWay(int Xpos, int Ypos);
-	void IIMove(int Xpos, int Ypos);
+	void FindWay(int Ypos, int Xpos);
+	void IIMove(int Ypos, int Xpos);
 	void HelpMove(int way, int x, int y);
 	void WayPointsMove(int* CountPoints, int **Positions);
 	Npc(String File, float PositionX, float PositionY, float ModelW, float ModelH, std::string* map);

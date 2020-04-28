@@ -163,6 +163,7 @@ int main()
 		}
 		if (ImGui::Button("Test"))
 		{
+			//npc.FindWay(player.getplayercoordinateY(), player.getplayercoordinateX());
 			npc.FindWay(17, 17);
 		}
 
@@ -172,7 +173,7 @@ int main()
 			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 			mapp.AddToCopy();
 		}
-		ImGui::InputInt2("Bot movement coord", BotCoord);
+		ImGui::InputInt2("Bot movement coord y/x", BotCoord);
 		if (ImGui::Button("Bot start"))
 		{
 			npc.IIMove(BotCoord[0], BotCoord[1]);
@@ -181,11 +182,12 @@ int main()
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
+
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
-		
-	
 		npc.IsActive(time, 0.2, mapp.CopyMap);
+		npc.FindWay(17, 17);
+		
 		window.setView(view);
 		window.clear();
 
@@ -193,9 +195,9 @@ int main()
 
 		window.draw(npc.sprite);
 		window.draw(player.sprite);
+
 		ImGui::SFML::Render(window);
 		window.display();
-		
 		
 	}
 	ImGui::SFML::Shutdown();
