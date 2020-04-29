@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <Windows.h>
+#include <math.h>
 #define HeroX 50
 #define HeroY 50
 #define TILE 100
@@ -45,12 +46,13 @@ Npc::~Npc()
 
 void Npc::IsActive(float time, float speed, std::string* map)
 {
-	LocationNpcX = x / 100;
-	LocationNpcY = y / 100;
+	LocationNpcX = (x / 100);
+	LocationNpcY = (y / 100);
+	//std::cout << LocationNpcX << " " << LocationNpcY << std::endl;
+	//std::cout << x << " " << y << std::endl << std::endl;
 	switch (dir)
 	{
 	case 1: // влево
-		std::cout << CurrentFrame << " ";
 		if (CurrentFrame > 4)
 			CurrentFrame = 0;
 		sprite.setTextureRect(IntRect(NpcX * int(CurrentFrame), NpcY, NpcX, NpcY));
@@ -59,7 +61,6 @@ void Npc::IsActive(float time, float speed, std::string* map)
 		dy = 0;
 		break;
 	case 2: // вправо
-		std::cout << CurrentFrame << " ";
 		if (CurrentFrame > 4)
 			CurrentFrame = 0;
 		sprite.setTextureRect(IntRect(NpcX * int(CurrentFrame), NpcY * 2, NpcX, NpcY));
@@ -85,18 +86,18 @@ void Npc::IsActive(float time, float speed, std::string* map)
 	x += dx * time;
 	y += dy * time;
 	IIMove(TargetY, TargetX);
-	Collision(map);
+// 	Collision(map);
 	speed = dx = dy = 0;
 	sprite.setPosition(x, y);
 }
 
 float Npc::getplayercoordinateX()
 {
-	return x;
+	return LocationNpcX;
 }
 float Npc::getplayercoordinateY()
 {
-	return y;
+	return LocationNpcY;
 }
 
 void Npc::WayPointsMove(int *CountPoints, int **Targets)
@@ -138,26 +139,28 @@ void Npc::WayPointsMove(int *CountPoints, int **Targets)
 
 void Npc::IIMove(int Ypos, int Xpos)
 {
-	//std::cout << TargetX << " " << TargetY << std::endl;
+	//std::cout << Xpos << " "<<Ypos << std::endl;
+	//std::cout << x << " " << y << std::endl;
+	//std::cout << dir << std::endl;
 	TargetX = Xpos;
 	TargetY = Ypos;
-	if (LocationNpcX <Xpos)
+	if (floor((x+50)/100) <Xpos+1)
 	{
 		dir = 2;
-	}
-	if (LocationNpcX > Xpos)
-	{
-		dir = 1;
-	}
-	if (LocationNpcY < Ypos)
+	}else
+	if (floor((y + 50) / 100) < Ypos+1)
 	{
 		dir = 4;
-	}
-	if (LocationNpcY > Ypos)
+	}else
+	if (floor((x - 51) / 100) > Xpos-1)
+	{
+		dir = 1;
+	}else
+	if (floor((y - 51) / 100) > Ypos-1)
 	{
 		dir = 3;
-	}
-	if (LocationNpcX == Xpos && LocationNpcY == Ypos)
+	}else
+	if (floor(x/100) == Xpos && floor(y/100) == Ypos)
 	{
 		dir = 0;
 	}

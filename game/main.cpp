@@ -52,7 +52,7 @@ int main()
 	DrawMap mapp("karta.txt");
 	//menu(window);
 	
-	Npc npc("hero.png", 1100, 1100, HeroX, HeroY, mapp.tempString);
+	Npc npc("hero.png", 1000, 1000, HeroX, HeroY, mapp.tempString);
 
 	bool Outside = false;
 	bool flagOutside = true;
@@ -81,7 +81,7 @@ int main()
 
 
 	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
-	int perem[3] = {0, 0, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
+	int perem[3] = {1, 1, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
 	while (window.isOpen())
 	{
 		Vector2i pixelPos = Mouse::getPosition(window);//забираем коорд курсора
@@ -159,7 +159,7 @@ int main()
 		}
 		if (ImGui::Button("Bot Coord"))
 		{
-			cout << npc.getplayercoordinateX()/100 << " " << npc.getplayercoordinateY() / 100 << endl;
+			cout << npc.getplayercoordinateX() << " " << npc.getplayercoordinateY()  << endl;
 		}
 		if (ImGui::Button("Test"))
 		{
@@ -182,7 +182,6 @@ int main()
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
-
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
 		npc.IsActive(time, 0.2, mapp.CopyMap);
