@@ -51,7 +51,8 @@ int main()
 	Player player("hero.png", 1000, 1000, HeroX, HeroY);
 	DrawMap mapp("karta.txt");
 	//menu(window);
-	
+	bool noise = false;
+	int noiseKoord[2];
 	Npc npc("hero.png", 1000, 1000, HeroX, HeroY, mapp.tempString);
 	bool update = true;
 	bool Outside = false; // переменная нахождения снаружи/внутри
@@ -125,6 +126,14 @@ int main()
 			player.CurrentFrame += 0.005*time;
 
 			
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Z))
+		{
+			noise = true;
+			noiseKoord[0] = floor(player.getplayercoordinateY()/100);
+			noiseKoord[1] = floor(player.getplayercoordinateX()/100);
+			npc.FindWay(noiseKoord[0], noiseKoord[1]);
+
 		}
 		if (flagOutside)
 		{
@@ -201,6 +210,7 @@ int main()
 		npc.IsActive(time, 0.3, mapp.tempString, &update);
 		//npc.FindWay(Target[0], Target[1]);
 		//npc.WayPointsMove(&waycount, WayPoints);
+
 		window.setView(view);
 		window.clear();
 

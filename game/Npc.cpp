@@ -49,7 +49,7 @@ Npc::~Npc()
 }
 
 
-void Npc::IsActive(float time, float speed, std::string* map, bool* update)
+void Npc::IsActive(float time, float speed, std::string* map, bool* update) //Основной метод для "жизни бота"
 {
 	LocationNpcX = (x / 100);
 	LocationNpcY = (y / 100);
@@ -74,7 +74,7 @@ void Npc::IsActive(float time, float speed, std::string* map, bool* update)
 			}
 		update = false;
 	}
-	switch (dir)
+	switch (dir) //движение
 	{
 	case 1: // влево
 		if (CurrentFrame > 4)
@@ -112,7 +112,7 @@ void Npc::IsActive(float time, float speed, std::string* map, bool* update)
 	x1 = x; y1 = y;
 	x2 = x + 50; y2 = y + 50;
 	IIMove();
- //	Collision(map);
+ 	Collision(map);
 	speed = dx = dy = 0;
 	sprite.setPosition(x, y);
 }
@@ -126,7 +126,7 @@ float Npc::getplayercoordinateY()
 	return LocationNpcY;
 }
 
-void Npc::WayPointsMove(int *CountPoints, int **Targets)
+void Npc::WayPointsMove(int *CountPoints, int **Targets) // движение по вэйпоинтам.  пример: npc.WayPointsMove(&waycount, WayPoints);
 {
 	int TempCounter = *CountPoints;
 	
@@ -165,10 +165,10 @@ void Npc::WayPointsMove(int *CountPoints, int **Targets)
 
 void Npc::IIMove()
 {
-
+	//движение бота. Х и У координаты углов бота
 	if (!targetY.empty() && !targetX.empty())
 	{
-
+		cout << "ff";
 		if (floor(x1 / 100) < (targetX.top()) && floor(x2 / 100) < ((targetX.top())))
 		{
 			dir = 2;
@@ -194,6 +194,7 @@ void Npc::IIMove()
 			dir = 0;
 			targetX.pop();
 			targetY.pop();
+			cout << "complete";
 		}
 
 	}
@@ -242,34 +243,11 @@ void Npc::FindWay(int Ypos, int Xpos)
 		if (MapCheck[Ypos][Xpos] != -1 || step1 > 34 * 10)
 		{
 			add = false;
-		//	std::cout << "FF ";
 		}
 	}
 
-/*	for (int i = 0; i < 34; i++)
-	{
-		for (int j = 0; j < 34; j++)
-		{
-			if (i == Ypos && j == Xpos)
-			{
-				std::cout << "FF ";
-				continue;
-			}
-			if (MapCheck[i][j] < 0)
-			{
-				std::cout << "## ";
-			}
-			else if (MapCheck[i][j] > 9)
-				std::cout << MapCheck[i][j] << " ";
-			else
-				std::cout << 0 << MapCheck[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}*/
-	// помечаю нужный путь, что бы бот потом по 0 ходил
 
-
-
+	//Добавление пути в стек
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено 
 	{
 		int xx = Xpos, yy = Ypos;
@@ -316,48 +294,10 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 }
 
-void Npc::HelpMove()
+void Npc::map()
 {
 
-	// убрать и сменить на стэк!!!!!!
 
-
-
-	/*
-	// восстанавливаю путь, собсна здесь идем по 0
-	if (MapCheck[LocationNpcY][LocationNpcX - 1] == 0)
-	{
-
-		TargetY = LocationNpcY;
-		TargetX = LocationNpcX - 1;
-
-		MapCheck[LocationNpcY][LocationNpcX] = -2;
-	}
-	else
-		if (MapCheck[LocationNpcY][LocationNpcX + 1] == 0)
-		{
-			TargetY = LocationNpcY;
-			TargetX = LocationNpcX + 1;
-
-			MapCheck[LocationNpcY][LocationNpcX] = -2;
-		}
-		else
-			if (MapCheck[LocationNpcY - 1][LocationNpcX] == 0)
-			{
-				TargetX = LocationNpcX;
-				TargetY = LocationNpcY - 1;
-
-				MapCheck[LocationNpcY][LocationNpcX] = -2;
-			}
-			else
-				if (MapCheck[LocationNpcY + 1][LocationNpcX] == 0)
-				{
-					TargetX = LocationNpcX;
-					TargetY = LocationNpcY + 1;
-					MapCheck[LocationNpcY][LocationNpcX] = -2;
-				}
-
-				*/
 	for (int i = 0; i < 34; i++)
 	{
 		for (int j = 0; j < 34; j++)

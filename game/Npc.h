@@ -29,7 +29,7 @@ public:
 	void Collision(std::string[]); // тут все понятно и так
 	void FindWay(int Ypos, int Xpos); //волновой поиск
 	void IIMove(); // простейшее движение
-	void HelpMove(); // метод для восстановления пути после волнового поиска
+	void map(); // вывод мапы
 	void WayPointsMove(int* CountPoints, int **Positions); // проход по вейпоинтам
 	Npc(String File, float PositionX, float PositionY, float ModelW, float ModelH, std::string* map);
 	~Npc();
