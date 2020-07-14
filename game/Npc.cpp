@@ -7,6 +7,7 @@
 #define HeroY 50
 #define TILE 100
 
+using namespace std;
 
 Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 {
@@ -32,10 +33,14 @@ Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 			if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
 			{
 				MapCheck[i][j] = -2;
+				MapTemp[i][j] = -2;
 			}
 			else
-			//if (map[i][j] == map[i][j] == 6) // путь есть, метим что мы тут не были
+				//if (map[i][j] == map[i][j] == 6) // путь есть, метим что мы тут не были
+			{
 				MapCheck[i][j] = -1;
+				MapTemp[i][j] = -1;
+			}
 		}
 }
 
@@ -44,12 +49,31 @@ Npc::~Npc()
 }
 
 
-void Npc::IsActive(float time, float speed, std::string* map)
+void Npc::IsActive(float time, float speed, std::string* map, bool* update)
 {
 	LocationNpcX = (x / 100);
 	LocationNpcY = (y / 100);
 	//std::cout << LocationNpcX << " " << LocationNpcY << std::endl;
 	//std::cout << x << " " << y << std::endl << std::endl;
+	if (*update)
+	{
+		for (int i = 0; i < 34; i++)
+			for (int j = 0; j < 34; j++)
+			{
+				if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
+				{
+					MapCheck[i][j] = -2;
+				//	MapTemp[i][j] = -2;
+				}
+				else
+					//if (map[i][j] == map[i][j] == 6) // путь есть, метим что мы тут не были
+				{
+					MapCheck[i][j] = -1;
+				//	MapTemp[i][j] = -1;
+				}
+			}
+		update = false;
+	}
 	switch (dir)
 	{
 	case 1: // влево
@@ -85,8 +109,10 @@ void Npc::IsActive(float time, float speed, std::string* map)
 	CurrentFrame += 0.005 * time;
 	x += dx * time;
 	y += dy * time;
-	IIMove(TargetY, TargetX);
-// 	Collision(map);
+	x1 = x; y1 = y;
+	x2 = x + 50; y2 = y + 50;
+	IIMove();
+ //	Collision(map);
 	speed = dx = dy = 0;
 	sprite.setPosition(x, y);
 }
@@ -137,40 +163,49 @@ void Npc::WayPointsMove(int *CountPoints, int **Targets)
 
 
 
-void Npc::IIMove(int Ypos, int Xpos)
+void Npc::IIMove()
 {
-	//std::cout << Xpos << " "<<Ypos << std::endl;
-	//std::cout << x << " " << y << std::endl;
-	//std::cout << dir << std::endl;
-	TargetX = Xpos;
-	TargetY = Ypos;
-	if (floor((x+50)/100) <Xpos+1)
+
+	if (!targetY.empty() && !targetX.empty())
 	{
-		dir = 2;
-	}else
-	if (floor((y + 50) / 100) < Ypos+1)
-	{
-		dir = 4;
-	}else
-	if (floor((x - 51) / 100) > Xpos-1)
-	{
-		dir = 1;
-	}else
-	if (floor((y - 51) / 100) > Ypos-1)
-	{
-		dir = 3;
-	}else
-	if (floor(x/100) == Xpos && floor(y/100) == Ypos)
-	{
-		dir = 0;
+
+		if (floor(x1 / 100) < (targetX.top()) && floor(x2 / 100) < ((targetX.top())))
+		{
+			dir = 2;
+		}
+
+		if (floor(y1 / 100) < (targetY.top()) && floor(y2 / 100) < ((targetY.top())))
+		{
+			dir = 4;
+		}
+
+		if (floor(x1 / 100) > (targetX.top()) && floor(x2 / 100) > ((targetX.top())))
+		{
+			dir = 1;
+		}
+
+		if (floor(y1 / 100) > (targetY.top()) && floor(y2 / 100) > ((targetY.top())))
+		{
+			dir = 3;
+		}
+
+		if (floor(x1 / 100) == targetX.top() && floor(y1 / 100) == targetY.top() && floor(x2 / 100) == targetX.top() && floor(y2 / 100) == targetY.top())
+		{
+			dir = 0;
+			targetX.pop();
+			targetY.pop();
+		}
+
 	}
 
 }
 
 void Npc::FindWay(int Ypos, int Xpos)
 {
+	// волновой поиск
 	int step1 = 0;
 	bool add = true;
+	
 	MapCheck[LocationNpcY][LocationNpcX] = step1;
 	
 	while (add == true)
@@ -231,34 +266,46 @@ void Npc::FindWay(int Ypos, int Xpos)
 		}
 		std::cout << std::endl;
 	}*/
-	
-	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено
+	// помечаю нужный путь, что бы бот потом по 0 ходил
+
+
+
+	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено 
 	{
 		int xx = Xpos, yy = Ypos;
 		for (int i = 0; i < MapCheck[Ypos][Xpos]; i++)
 		{
 			if (MapCheck[yy][xx - 1] == MapCheck[Ypos][Xpos] - i)
 			{
-				MapCheck[yy][xx - 1] = 0;
+				
+				targetY.push(yy);
+				targetX.push(xx - 1);
+		//		MapCheck[yy][xx - 1] = 0;
 				xx--;
 			}
 			if (MapCheck[yy][xx + 1] == MapCheck[Ypos][Xpos] - i)
 			{
-				MapCheck[yy][xx + 1] = 0;
+				targetY.push(yy);
+				targetX.push(xx + 1);
+			//	MapCheck[yy][xx + 1] = 0;
 				xx++;
 			}
 			if (MapCheck[yy - 1][xx] == MapCheck[Ypos][Xpos] - i)
 			{
-				MapCheck[yy - 1][xx] = 0;
+				targetY.push(yy-1);
+				targetX.push(xx);
+		//		MapCheck[yy - 1][xx] = 0;
 				yy--;
 			}
 			if (MapCheck[yy + 1][xx] == MapCheck[Ypos][Xpos] - i)
 			{
-				MapCheck[yy + 1][xx] = 0;
+				targetY.push(yy+1);
+				targetX.push(xx);
+			//	MapCheck[yy + 1][xx] = 0;
 				yy++;
 			}
 		}
-	HelpMove(MapCheck[Ypos][Xpos], Ypos, Xpos);
+	//HelpMove();
 	}
 	else//решение не найдено
 	{
@@ -269,9 +316,15 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 }
 
-void Npc::HelpMove(int way, int Ypos, int Xpos)
+void Npc::HelpMove()
 {
 
+	// убрать и сменить на стэк!!!!!!
+
+
+
+	/*
+	// восстанавливаю путь, собсна здесь идем по 0
 	if (MapCheck[LocationNpcY][LocationNpcX - 1] == 0)
 	{
 
@@ -304,11 +357,12 @@ void Npc::HelpMove(int way, int Ypos, int Xpos)
 					MapCheck[LocationNpcY][LocationNpcX] = -2;
 				}
 
-	/*for (int i = 0; i < 34; i++)
+				*/
+	for (int i = 0; i < 34; i++)
 	{
 		for (int j = 0; j < 34; j++)
 		{
-			if (i == Ypos && j == Xpos)
+			if (i == 17 && j == 17)
 			{
 				std::cout << "FF ";
 				continue;
@@ -323,7 +377,7 @@ void Npc::HelpMove(int way, int Ypos, int Xpos)
 				std::cout << 0 << MapCheck[i][j] << " ";
 		}
 		std::cout << std::endl;
-	}*/
+	}
 }
 
 

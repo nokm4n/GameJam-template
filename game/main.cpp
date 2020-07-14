@@ -32,7 +32,7 @@ void getplayercoordinateforview(float x, float y)
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	float CurrentFrame=0;
+	float CurrentFrame=0; // текущий кадр анимации
 	Font font;
 	font.loadFromFile("CyrilicOld.ttf");
 	//RenderWindow window(VideoMode(1920, 1080), "Game", Style::Fullscreen);
@@ -53,19 +53,19 @@ int main()
 	//menu(window);
 	
 	Npc npc("hero.png", 1000, 1000, HeroX, HeroY, mapp.tempString);
-
-	bool Outside = false;
-	bool flagOutside = true;
+	bool update = true;
+	bool Outside = false; // переменная нахождения снаружи/внутри
+	bool flagOutside = true; // переменная для включения/выключения возможности войти/выйти из дома
 	int CounterWayPoints = 5; //Количество вэйпоинтов
-	 // массив вейпоинтов
+	
 
 	int BotCoord[2] = { 0, 0 };
 
-	int** WayPoints = new int* [5];
+	int** WayPoints = new int* [5];  // массив вейпоинтов
 	for (int i = 0; i < 5; i++)
 		WayPoints[i] = new int[2];
 
-
+	int waycount= 5;
 
 
 	WayPoints[0][0] = 10;
@@ -79,9 +79,10 @@ int main()
 	WayPoints[4][0] = 10;
 	WayPoints[4][1] = 10;
 
-
+	int Target[2] = { 10, 10 }; // цель бота y/x
+	int tempTarget[2] = { 10, 10 }; //цель отображающаяся в ui
 	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
-	int perem[3] = {1, 1, 0}; ////////////// Номер дома который вытаскиваем из рандома, стартовая позиция дома по Х и У
+	int perem[3] = {1, 1, 0}; // Номер дома который вытаскиваем из рандома, стартовая позиция дома по У и Х
 	while (window.isOpen())
 	{
 		Vector2i pixelPos = Mouse::getPosition(window);//забираем коорд курсора
@@ -160,33 +161,46 @@ int main()
 		if (ImGui::Button("Bot Coord"))
 		{
 			cout << npc.getplayercoordinateX() << " " << npc.getplayercoordinateY()  << endl;
+			
 		}
 		if (ImGui::Button("Test"))
 		{
+			
+			//npc.HelpMove();
 			//npc.FindWay(player.getplayercoordinateY(), player.getplayercoordinateX());
-			npc.FindWay(17, 17);
+			//npc.FindWay(17, 17);
 		}
 
 		ImGui::InputInt3("number house", perem); ///// первая переменная номер дома, вторая и третья квадраты
 		if (ImGui::Button("Change dom"))
 		{
+			update = true;
 			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 			mapp.AddToCopy();
 		}
 		ImGui::InputInt2("Bot movement coord y/x", BotCoord);
 		if (ImGui::Button("Bot start"))
 		{
-			npc.IIMove(BotCoord[0], BotCoord[1]);
+			npc.IIMove();
+			
 		
+		}
+		ImGui::InputInt2("Bot smart movement coord y/x", tempTarget);
+		if (ImGui::Button("Bot start smart"))
+		{
+			Target[0] = tempTarget[0];
+			Target[1] = tempTarget[1];
+			npc.FindWay(Target[0], Target[1]);
+
 		}
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
-		npc.IsActive(time, 0.2, mapp.CopyMap);
-		npc.FindWay(17, 17);
-		
+		npc.IsActive(time, 0.3, mapp.tempString, &update);
+		//npc.FindWay(Target[0], Target[1]);
+		//npc.WayPointsMove(&waycount, WayPoints);
 		window.setView(view);
 		window.clear();
 

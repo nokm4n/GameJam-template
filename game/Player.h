@@ -22,7 +22,7 @@ public:
 	void Collision(std::string[]);
 	float getplayercoordinateX();
 	float getplayercoordinateY();
-	bool PlayerInside(int MapSize, int* DomX, int* DomY, bool* Outside);
+	bool PlayerInside(int MapSize, int* DomY, int* DomYX, bool* Outside); // размер карты в блоках(сейчас 3 на 3), у и х координата для дома в котором находимся, переменная внутри/снаружи 
 	Player(String File, float PositionX, float PositionY, float ModelW, float ModelH);
 	~Player();
 };

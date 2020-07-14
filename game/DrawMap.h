@@ -8,13 +8,13 @@ using namespace sf;
 class DrawMap
 {
 public:
-	string tempString[34];
-	string randDom[34];
-	string CopyMap[34];
+	string tempString[34];// сама карта
+	string randDom[34];// для домиков на замену
+	string CopyMap[34];// копия карты, для того что бы помнить какой была до входа в дом
 	//sf::String sfString[34];
 	DrawMap(string);
-	void AddToCopy();
-	void ChangeDom(int, int, int);
+	void AddToCopy(); // запоминание карты из темпа в копи
+	void ChangeDom(int dom, int y, int x); //номер дома, координаты у и х
 	void Drawsprite(RenderWindow & window, Sprite);
 	~DrawMap();
 };
