@@ -9,8 +9,9 @@ C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(120,3
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(121,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(126,38): warning C4305: =: усечение из "double" в "float"
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(127,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(134,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(135,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(210,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(211,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(133,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(137,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(141,21): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(214,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(215,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
   game.vcxproj -> C:\Users\Никита\Desktop\прога\vs\GameJam-template\Debug\game.exe

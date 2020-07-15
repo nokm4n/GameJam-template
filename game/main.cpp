@@ -24,7 +24,7 @@ View view;
 
 void getplayercoordinateforview(float x, float y)
 {
-	view.setCenter(x, y);
+	view.setCenter(x+25, y+25);
 }
 
 
@@ -128,6 +128,15 @@ int main()
 
 			
 		}
+		if (Keyboard::isKeyPressed(Keyboard::Add)) // Приближение камеры
+		{
+			view.zoom(0.995);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Subtract))// Отдаление камеры
+		{
+			view.zoom(1.005);
+		}
+
 		if (flagOutside)
 		{
 			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
