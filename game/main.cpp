@@ -53,6 +53,7 @@ int main()
 	//menu(window);
 	bool noise = false;
 	int noiseKoord[2];
+	float botSpeed = 0.4;
 	Npc npc("hero.png", 1000, 1000, HeroX, HeroY, mapp.tempString);
 	bool update = true;
 	bool Outside = false; // переменна€ нахождени€ снаружи/внутри
@@ -127,14 +128,6 @@ int main()
 
 			
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Z))
-		{
-			noise = true;
-			noiseKoord[0] = floor(player.getplayercoordinateY()/100);
-			noiseKoord[1] = floor(player.getplayercoordinateX()/100);
-			npc.FindWay(noiseKoord[0], noiseKoord[1]);
-
-		}
 		if (flagOutside)
 		{
 			if (player.PlayerInside(3, &DomI, &DomJ, &Outside))
@@ -174,7 +167,7 @@ int main()
 		}
 		if (ImGui::Button("Test"))
 		{
-			
+			npc.map(); //не работает тк карта посто€нно обновл€етс в функции IIActive
 			//npc.HelpMove();
 			//npc.FindWay(player.getplayercoordinateY(), player.getplayercoordinateX());
 			//npc.FindWay(17, 17);
@@ -202,12 +195,23 @@ int main()
 			npc.FindWay(Target[0], Target[1]);
 
 		}
+
+		if (ImGui::Button("Noise"))
+		{
+			noise = true;
+			noiseKoord[0] = floor(player.getplayercoordinateY() / 100);
+			noiseKoord[1] = floor(player.getplayercoordinateX() / 100);
+			npc.FindWay(noiseKoord[0], noiseKoord[1]);
+
+		}
+
+		ImGui::InputFloat("Speed", &botSpeed);
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
-		npc.IsActive(time, 0.3, mapp.tempString, &update);
+		npc.IsActive(time, botSpeed, mapp.tempString, &update);
 		//npc.FindWay(Target[0], Target[1]);
 		//npc.WayPointsMove(&waycount, WayPoints);
 

@@ -168,7 +168,8 @@ void Npc::IIMove()
 	//движение бота. ’ и ” координаты углов бота
 	if (!targetY.empty() && !targetX.empty())
 	{
-		cout << "ff";
+		//cout << targetY.top() << " " << targetX.top() << endl;
+	//	cout << "ff";
 		if (floor(x1 / 100) < (targetX.top()) && floor(x2 / 100) < ((targetX.top())))
 		{
 			dir = 2;
@@ -192,11 +193,12 @@ void Npc::IIMove()
 		if (floor(x1 / 100) == targetX.top() && floor(y1 / 100) == targetY.top() && floor(x2 / 100) == targetX.top() && floor(y2 / 100) == targetY.top())
 		{
 			dir = 0;
+			//cout << targetY.top() << endl;
 			targetX.pop();
 			targetY.pop();
-			cout << "complete";
+		//	cout << "complete";
 		}
-
+		
 	}
 
 }
@@ -251,6 +253,8 @@ void Npc::FindWay(int Ypos, int Xpos)
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено 
 	{
 		int xx = Xpos, yy = Ypos;
+		targetX.push(xx);
+		targetY.push(yy);
 		for (int i = 0; i < MapCheck[Ypos][Xpos]; i++)
 		{
 			if (MapCheck[yy][xx - 1] == MapCheck[Ypos][Xpos] - i)
@@ -258,32 +262,32 @@ void Npc::FindWay(int Ypos, int Xpos)
 				
 				targetY.push(yy);
 				targetX.push(xx - 1);
-		//		MapCheck[yy][xx - 1] = 0;
+				MapCheck[yy][xx - 1] = 0;
 				xx--;
 			}
 			if (MapCheck[yy][xx + 1] == MapCheck[Ypos][Xpos] - i)
 			{
 				targetY.push(yy);
 				targetX.push(xx + 1);
-			//	MapCheck[yy][xx + 1] = 0;
+				MapCheck[yy][xx + 1] = 0;
 				xx++;
 			}
 			if (MapCheck[yy - 1][xx] == MapCheck[Ypos][Xpos] - i)
 			{
 				targetY.push(yy-1);
 				targetX.push(xx);
-		//		MapCheck[yy - 1][xx] = 0;
+				MapCheck[yy - 1][xx] = 0;
 				yy--;
 			}
 			if (MapCheck[yy + 1][xx] == MapCheck[Ypos][Xpos] - i)
 			{
 				targetY.push(yy+1);
 				targetX.push(xx);
-			//	MapCheck[yy + 1][xx] = 0;
+				MapCheck[yy + 1][xx] = 0;
 				yy++;
 			}
 		}
-	//HelpMove();
+	//	map();
 	}
 	else//решение не найдено
 	{
@@ -296,7 +300,11 @@ void Npc::FindWay(int Ypos, int Xpos)
 
 void Npc::map()
 {
-
+	if (!targetX.empty())
+		cout << targetY.top() << " " << targetX.top() << endl;
+	else
+		cout << "empty";
+/*
 
 	for (int i = 0; i < 34; i++)
 	{
@@ -317,7 +325,7 @@ void Npc::map()
 				std::cout << 0 << MapCheck[i][j] << " ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 }
 
 
