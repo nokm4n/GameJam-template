@@ -15,9 +15,10 @@ private:
 	int LocationNpcX, LocationNpcY;
 	std::stack <int> targetY;
 	std::stack <int> targetX;
+	float dx, dy, w, h, speed, CurrentFrame = 0;
+	int dir = 0;// 1-left 2-right 3-down 4-up
 public:
-	float dx, dy, w, h, speed, CurrentFrame=0;
-	int dir=0;// 1-left 2-right 3-down 4-up
+
 	String File;
 	Image image;
 	Texture texture;
