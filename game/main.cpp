@@ -4,6 +4,7 @@
 #include <sstream>
 #include "Player.h"
 #include "Npc.h"
+#include "Item.h"
 #include "DrawMap.h"
 #include "im/imgui.h"
 #include "im/imgui-sfml.h"
@@ -47,9 +48,10 @@ int main()
 	s_map.setTexture(map);
 
 	ImGui::SFML::Init(window);			////////////////////////////////////////////////////Im GUi
-
+	
 	Player player("hero.png", 1000, 1000, HeroX, HeroY);
 	DrawMap mapp("karta.txt");
+	Item item("hero.png", 1100, 1000, HeroX, HeroY, mapp.tempString);
 	//menu(window);
 	bool noise = false;
 	int noiseKoord[2];
@@ -150,14 +152,13 @@ int main()
 		}
 
 
+		/*float dX = pos.x - player.getplayercoordinateX();//вектор , колинеарный прямой, которая пересекает спрайт и курсор
+		float dY = pos.y - player.getplayercoordinateY();//он же, координата y
+		float rotation = (atan2(dY, dX)) * 180 / 3.14159265;//получаем угол в радианах и переводим его в градусы
+		player.sprite.setRotation(rotation);//поворачиваем спрайт на эти градусы*/
+	
 
-	/*		float dX = pos.x - player.getplayercoordinateX();//вектор , колинеарный прямой, которая пересекает спрайт и курсор
-			float dY = pos.y - player.getplayercoordinateY();//он же, координата y
-			float rotation = (atan2(dY, dX)) * 180 / 3.14159265;//получаем угол в радианах и переводим его в градусы
-			player.sprite.setRotation(rotation);//поворачиваем спрайт на эти градусы
-			////////////////////////////////////////////////////Im GUi*/
-			
-
+		////////////////////////////////////////////////////Im GUi
 		ImGui::SFML::Update(window, clock.restart());
 		ImGui::Begin("Sample window"); // создаём окно
 		if (ImGui::Button("Inside/Outside on/off"))
@@ -218,6 +219,8 @@ int main()
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
+		item.Active(player.getplayercoordinateX(), player.getplayercoordinateY()); //взаимодействие с игроком
+
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
 		npc.IsActive(time, botSpeed, mapp.tempString, &update);
@@ -228,7 +231,7 @@ int main()
 		window.clear();
 
 		mapp.Drawsprite(window, s_map); //////////risovka karti
-
+		window.draw(item.sprite);
 		window.draw(npc.sprite);
 		window.draw(player.sprite);
 

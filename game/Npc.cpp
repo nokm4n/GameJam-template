@@ -26,7 +26,7 @@ Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 	TargetX = LocationNpcX;
 	TargetY = LocationNpcY;
 
-
+	//кажись для коллизии, разобраться потом!!!!
 	for (int i = 0; i < 34; i++)
 		for (int j = 0; j < 34; j++)
 		{

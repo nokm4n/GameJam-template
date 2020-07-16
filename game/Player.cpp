@@ -49,7 +49,8 @@ void Player::Move(float time, std::string map[25])
 	y += dy*time;
 	Collision(map);
 	speed = dx = dy = 0;
-
+	x1 = x; y1 = y;
+	x2 = x + 50; y2 = y + 50;
 	
 	sprite.setPosition(x, y);
 }
@@ -134,5 +135,14 @@ bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
 		}
 	return false;
 	
+}
+
+
+void Player::ItemCollect(int itemY, int itemX)
+{
+	if (itemX == x1 / 100 && itemY == y1 / 100 && itemX == x2 / 100 && itemY == y2 / 100)
+	{
+		//Инвентарь или что то типо того
+	}
 }
 

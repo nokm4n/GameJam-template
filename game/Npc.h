@@ -17,15 +17,16 @@ private:
 	std::stack <int> targetX;
 	float dx, dy, w, h, speed, CurrentFrame = 0;
 	int dir = 0;// 1-left 2-right 3-down 4-up
-public:
+	int TargetX = LocationNpcX, TargetY = LocationNpcY;
+	int  MapCheck[34][34];
+	int MapTemp[34][34];
 
+	
+public:
 	String File;
 	Image image;
 	Texture texture;
 	Sprite sprite;
-	int TargetX = LocationNpcX, TargetY = LocationNpcY;
-	int  MapCheck[34][34];
-	int MapTemp[34][34];
 	void IsActive(float time , float speed, std::string* map, bool* update); //метод для того что бы нпс "жил"
 	void Collision(std::string[]); // тут все понятно и так
 	void FindWay(int Ypos, int Xpos); //волновой поиск

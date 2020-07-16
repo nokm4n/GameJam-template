@@ -136,12 +136,14 @@
     <ClCompile Include="im\imgui_demo.cpp" />
     <ClCompile Include="im\imgui_draw.cpp" />
     <ClCompile Include="im\imgui_widgets.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawMap.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
