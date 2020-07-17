@@ -253,38 +253,41 @@ void Npc::FindWay(int Ypos, int Xpos)
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено 
 	{
 		int xx = Xpos, yy = Ypos;
-		targetX.push(xx);
-		targetY.push(yy);
-		for (int i = 0; i < MapCheck[Ypos][Xpos]; i++)
+		if (targetX.empty() && targetY.empty())
 		{
-			if (MapCheck[yy][xx - 1] == MapCheck[Ypos][Xpos] - i)
+			targetX.push(xx);
+			targetY.push(yy);
+			for (int i = 0; i < MapCheck[Ypos][Xpos]; i++)
 			{
-				
-				targetY.push(yy);
-				targetX.push(xx - 1);
-				MapCheck[yy][xx - 1] = 0;
-				xx--;
-			}
-			if (MapCheck[yy][xx + 1] == MapCheck[Ypos][Xpos] - i)
-			{
-				targetY.push(yy);
-				targetX.push(xx + 1);
-				MapCheck[yy][xx + 1] = 0;
-				xx++;
-			}
-			if (MapCheck[yy - 1][xx] == MapCheck[Ypos][Xpos] - i)
-			{
-				targetY.push(yy-1);
-				targetX.push(xx);
-				MapCheck[yy - 1][xx] = 0;
-				yy--;
-			}
-			if (MapCheck[yy + 1][xx] == MapCheck[Ypos][Xpos] - i)
-			{
-				targetY.push(yy+1);
-				targetX.push(xx);
-				MapCheck[yy + 1][xx] = 0;
-				yy++;
+				if (MapCheck[yy][xx - 1] == MapCheck[Ypos][Xpos] - i)
+				{
+
+					targetY.push(yy);
+					targetX.push(xx - 1);
+					MapCheck[yy][xx - 1] = 0;
+					xx--;
+				}
+				if (MapCheck[yy][xx + 1] == MapCheck[Ypos][Xpos] - i)
+				{
+					targetY.push(yy);
+					targetX.push(xx + 1);
+					MapCheck[yy][xx + 1] = 0;
+					xx++;
+				}
+				if (MapCheck[yy - 1][xx] == MapCheck[Ypos][Xpos] - i)
+				{
+					targetY.push(yy - 1);
+					targetX.push(xx);
+					MapCheck[yy - 1][xx] = 0;
+					yy--;
+				}
+				if (MapCheck[yy + 1][xx] == MapCheck[Ypos][Xpos] - i)
+				{
+					targetY.push(yy + 1);
+					targetX.push(xx);
+					MapCheck[yy + 1][xx] = 0;
+					yy++;
+				}
 			}
 		}
 	//	map();
@@ -296,6 +299,17 @@ void Npc::FindWay(int Ypos, int Xpos)
 	}	
 	
 	
+}
+
+
+void Npc::ClearWay()
+{
+	while (!targetX.empty() && !targetY.empty())
+	{
+		dir = 0;
+		targetX.pop();
+		targetY.pop();
+	}
 }
 
 void Npc::map()

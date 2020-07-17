@@ -128,7 +128,6 @@ int main()
 			player.dir = 4; player.speed = 0.6;
 			player.CurrentFrame += 0.005*time;
 
-			
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Add)) // Приближение камеры
 		{
@@ -205,7 +204,12 @@ int main()
 			npc.FindWay(Target[0], Target[1]);
 
 		}
+		if (ImGui::Button("Clear way"))
+		{
+			npc.ClearWay();
 
+		}
+	
 		if (ImGui::Button("Noise"))
 		{
 			noise = true;

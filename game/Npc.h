@@ -33,6 +33,7 @@ public:
 	void IIMove(); // простейшее движение
 	void map(); // вывод мапы
 	void WayPointsMove(int* CountPoints, int **Positions); // проход по вейпоинтам
+	void ClearWay(); // Очищение стека
 	Npc(String File, float PositionX, float PositionY, float ModelW, float ModelH, std::string* map);
 	~Npc();
 
