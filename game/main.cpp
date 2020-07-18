@@ -4,6 +4,7 @@
 #include <sstream>
 #include "Player.h"
 #include "Npc.h"
+#include "LifeBar.h"
 #include "Item.h"
 #include "DrawMap.h"
 #include "im/imgui.h"
@@ -49,12 +50,15 @@ int main()
 	s_map.setTexture(map);
 
 	ImGui::SFML::Init(window);			////////////////////////////////////////////////////Im GUi
-	
 	Player player("hero.png", 1000, 1000, HeroX, HeroY);
 	DrawMap mapp("karta.txt");
 	Item item("item.png", 1100, 1000, HeroX, HeroY, mapp.tempString, 1);
-
 	Item item2("item.png", 1200, 1000, HeroX, HeroY, mapp.tempString, 2);
+
+	LifeBar lifeBarPlayer("life2.png");
+
+
+	int hp = 0;
 	//menu(window);
 	bool noise = false;
 	int noiseKoord[2];
@@ -231,7 +235,10 @@ int main()
 			npc.ClearWay();
 
 		}
-	
+		if (ImGui::SliderInt("Hp", &hp, 0, 100))
+		{
+			lifeBarPlayer.update(hp);
+		}
 		if (ImGui::Button("Noise"))
 		{
 			noise = true;
@@ -247,21 +254,22 @@ int main()
 		
 		 //взаимодействие с игроком
 
+		
+
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);
 		npc.IsActive(time, botSpeed, mapp.tempString, &update);
 		//npc.FindWay(Target[0], Target[1]);
 		//npc.WayPointsMove(&waycount, WayPoints);
-
+		
 		window.setView(view);
 		window.clear();
-
 		mapp.Drawsprite(window, s_map); //////////Рисовка карты
 		window.draw(item.sprite);
 		window.draw(item2.sprite);
 		window.draw(npc.sprite);
 		window.draw(player.sprite);
-
+		lifeBarPlayer.draw(window);
 		ImGui::SFML::Render(window);
 		window.display();
 		

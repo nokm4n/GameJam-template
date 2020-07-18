@@ -1,24 +1,24 @@
 ﻿  main.cpp
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(61,22): warning C4305: инициализация: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(94,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(112,38): warning C4305: =: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(113,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(117,38): warning C4305: =: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(118,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(122,38): warning C4305: =: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(123,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(128,38): warning C4305: =: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(129,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(136,74): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(136,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(139,75): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(139,44): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(148,78): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(148,47): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(157,79): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(157,48): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(163,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(65,22): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(98,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(116,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(117,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(121,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(122,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(126,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(127,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(132,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(133,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(140,74): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(140,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(143,75): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(143,44): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(152,78): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(152,47): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(161,79): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(161,48): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(167,19): warning C4305: аргумент: усечение из "double" в "float"
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(238,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(239,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(171,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(245,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(246,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
   game.vcxproj -> C:\Users\Никита\Desktop\прога\vs\GameJam-template\Debug\game.exe

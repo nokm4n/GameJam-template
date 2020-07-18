@@ -137,6 +137,7 @@
     <ClCompile Include="im\imgui_draw.cpp" />
     <ClCompile Include="im\imgui_widgets.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LifeBar.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="DrawMap.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="LifeBar.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
