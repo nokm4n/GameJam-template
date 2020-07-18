@@ -7,6 +7,8 @@
 #define TILE 100
 
 using namespace sf;
+using namespace std;
+
 
 void Player::Move(float time, std::string map[25])
 {

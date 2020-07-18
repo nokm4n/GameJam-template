@@ -16,8 +16,9 @@
 
 const int HEIGHT_MAP = 34;//размер карты высота
 const int WIDTH_MAP = 34;//размер карты ширина 
-using namespace sf;
 
+using namespace sf;
+using namespace std;
 
 View view;
 
@@ -52,20 +53,19 @@ int main()
 	Player player("hero.png", 1000, 1000, HeroX, HeroY);
 	DrawMap mapp("karta.txt");
 	Item item("item.png", 1100, 1000, HeroX, HeroY, mapp.tempString, 1);
+
+	Item item2("item.png", 1200, 1000, HeroX, HeroY, mapp.tempString, 2);
 	//menu(window);
 	bool noise = false;
 	int noiseKoord[2];
 	float botSpeed = 0.4;
 	Npc npc("hero.png", 1000, 1000, HeroX, HeroY, mapp.tempString);
-	bool update = true;
+	bool update = true; //Переменная для обновления карты у бота
 	bool Outside = false; // переменная нахождения снаружи/внутри
 	bool flagOutside = true; // переменная для включения/выключения возможности войти/выйти из дома
 	int CounterWayPoints = 5; //Количество вэйпоинтов
-	
 
-	int BotCoord[2] = { 0, 0 };
-
-	int** WayPoints = new int* [5];  // массив вейпоинтов
+	/*int** WayPoints = new int* [5];  // массив вейпоинтов
 	for (int i = 0; i < 5; i++)
 		WayPoints[i] = new int[2];
 
@@ -81,7 +81,7 @@ int main()
 	WayPoints[3][0] = 15;
 	WayPoints[3][1] = 15;
 	WayPoints[4][0] = 10;
-	WayPoints[4][1] = 10;
+	WayPoints[4][1] = 10;*/
 
 	int Target[2] = { 10, 10 }; // цель бота y/x
 	int tempTarget[2] = { 10, 10 }; //цель отображающаяся в ui
@@ -134,6 +134,9 @@ int main()
 		//	view.zoom(0.995);
 			player.ItemCollect(item.getY(), item.getX(), item.itemID);
 			item.Active(player.getplayercoordinateY(), player.getplayercoordinateX());
+
+			player.ItemCollect(item2.getY(), item2.getX(), item2.itemID);
+			item2.Active(player.getplayercoordinateY(), player.getplayercoordinateX());
 			
 		}
 		
@@ -146,9 +149,15 @@ int main()
 				player.ItemInsert(item.itemID);
 			}
 
-
 		}
-
+		if (Keyboard::isKeyPressed(Keyboard::R)) // Выложить предмет
+		{
+			if (player.inventory[item2.itemID])
+			{
+				item2.PlaceItem(player.getplayercoordinateY(), player.getplayercoordinateX());
+				player.ItemInsert(item2.itemID);
+			}
+		}
 		if (Keyboard::isKeyPressed(Keyboard::Add)) // Приближение камеры
 		{
 			view.zoom(0.995);
@@ -209,13 +218,6 @@ int main()
 			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 			mapp.AddToCopy();
 		}
-		ImGui::InputInt2("Bot movement coord y/x", BotCoord);
-		if (ImGui::Button("Bot start"))
-		{
-			npc.IIMove();
-			
-		
-		}
 		ImGui::InputInt2("Bot smart movement coord y/x", tempTarget);
 		if (ImGui::Button("Bot start smart"))
 		{
@@ -254,8 +256,9 @@ int main()
 		window.setView(view);
 		window.clear();
 
-		mapp.Drawsprite(window, s_map); //////////risovka karti
+		mapp.Drawsprite(window, s_map); //////////Рисовка карты
 		window.draw(item.sprite);
+		window.draw(item2.sprite);
 		window.draw(npc.sprite);
 		window.draw(player.sprite);
 
