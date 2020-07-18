@@ -56,7 +56,7 @@ int main()
 	Item item2("item.png", 1200, 1000, HeroX, HeroY, mapp.tempString, 2);
 
 	LifeBar lifeBarPlayer("life2.png");
-
+	float scale = 1;
 
 	int hp = 0;
 	//menu(window);
@@ -164,10 +164,12 @@ int main()
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Add)) // Приближение камеры
 		{
+			scale *= 0.995;
 			view.zoom(0.995);
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Subtract))// Отдаление камеры
 		{
+			scale *= 1.005;
 			view.zoom(1.005);
 		}
 
@@ -270,7 +272,7 @@ int main()
 		window.draw(item2.sprite);
 		window.draw(npc.sprite);
 		window.draw(player.sprite);
-		lifeBarPlayer.draw(window);
+		lifeBarPlayer.draw(window, scale);
 		ImGui::SFML::Render(window);
 		window.display();
 		

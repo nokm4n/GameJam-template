@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
+Npc::Npc(String F, float X, float Y, float W, float H, string *map)
 {
 	File = F;
 	dx = dy = 0;
@@ -23,8 +23,6 @@ Npc::Npc(String F, float X, float Y, float W, float H, std::string *map)
 	sprite.setTextureRect(IntRect(32, 48, w, h));
 	LocationNpcX = x / 100;
 	LocationNpcY = y / 100;
-	TargetX = LocationNpcX;
-	TargetY = LocationNpcY;
 
 	//кажись для коллизии, разобраться потом!!!!
 	for (int i = 0; i < 34; i++)
@@ -248,7 +246,6 @@ void Npc::FindWay(int Ypos, int Xpos)
 		}
 	}
 
-
 	//Добавление пути в стек
 	if (MapCheck[Ypos][Xpos] != -2 && MapCheck[Ypos][Xpos] != -1 )//решение найдено 
 	{
@@ -319,7 +316,6 @@ void Npc::map()
 	else
 		cout << "empty";
 /*
-
 	for (int i = 0; i < 34; i++)
 	{
 		for (int j = 0; j < 34; j++)

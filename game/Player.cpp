@@ -145,14 +145,13 @@ bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
 
 void Player::ItemCollect(int itemY, int itemX, int itemID) //Подбирание предмета
 {
-	if (itemY/100 ==y1 && (itemY+50)/100==y2 && itemX/100==x1 && (itemX+50)/100==x2)
+	if (itemY / 100 == y1 && (itemY + 50) / 100 == y2 && itemX / 100 == x1 && (itemX + 50) / 100 == x2)
 	{
 		inventory[itemID] = true;
 		//Инвентарь или что то типо того
-		std::cout << "item added";
+	//	std::cout << "item added";
 	}
-	else
-		std::cout << "no item here";
+
 }
 
 void Player::ItemInsert(int itemID)

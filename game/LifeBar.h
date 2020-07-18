@@ -13,7 +13,7 @@ public:
 	int max;
 	RectangleShape bar;
 	LifeBar(String F);
-	void draw(RenderWindow& window);
+	void draw(RenderWindow& window, float scale);
 	void update(int hp);
 
 };

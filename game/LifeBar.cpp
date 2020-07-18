@@ -15,20 +15,20 @@ LifeBar::LifeBar(String F)
 }
 
 void LifeBar::update(int k)// k-текущее здоровье
-
 {
-	if (k > 0)
-		if (k < max)
-			bar.setSize(Vector2f(20, (max - k) * 170 / max));//если не отрицательно и при этом меньше максимума, то устанавливаем новое значение (новый размер) для черного прямоугольника
+	if (k < max && k > 0)
+		bar.setSize(Vector2f(20, (max - k) * 170 / max));//если не отрицательно и при этом меньше максимума, то устанавливаем новое значение (новый размер) для черного прямоугольника
 }
 
-void LifeBar::draw(RenderWindow& window)
+void LifeBar::draw(RenderWindow& window, float scale)
 {
+	s.setScale(scale, scale);
+	bar.setScale(scale, scale);
 	Vector2f center = window.getView().getCenter();
 	Vector2f size = window.getView().getSize();
 
-	s.setPosition(center.x - size.x / 2 + 10, center.y - size.y / 2 + 10);//позиция на экране
-	bar.setPosition(center.x - size.x / 2 + 30, center.y - size.y / 2 + 28);
+	s.setPosition((center.x  - size.x / 2 + 10*scale), (center.y  - size.y / 2 + 10*scale));//позиция на экране
+	bar.setPosition(center.x - size.x / 2 + 30*scale, center.y - size.y / 2 + 28*scale);
 
 	window.draw(s);//сначала рисуем полоску здоровья
 	window.draw(bar);//поверх неё уже черный прямоугольник, он как бы покрывает её
