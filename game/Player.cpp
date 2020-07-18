@@ -160,3 +160,11 @@ void Player::ItemInsert(int itemID)
 	inventory[itemID] = false;
 }
 
+void Player::setHp(int hp)
+{
+	if (hp >= 0 && hp < 100)
+	{
+		std::cout <<hp << std::endl;
+		this->hp = hp;
+	}
+}
