@@ -51,7 +51,7 @@ int main()
 	
 	Player player("hero.png", 1000, 1000, HeroX, HeroY);
 	DrawMap mapp("karta.txt");
-	Item item("hero.png", 1100, 1000, HeroX, HeroY, mapp.tempString);
+	Item item("item.png", 1100, 1000, HeroX, HeroY, mapp.tempString, 1);
 	//menu(window);
 	bool noise = false;
 	int noiseKoord[2];
@@ -129,6 +129,26 @@ int main()
 			player.CurrentFrame += 0.005*time;
 
 		}
+		if (Keyboard::isKeyPressed(Keyboard::E)) // Взять предмет
+		{
+		//	view.zoom(0.995);
+			player.ItemCollect(item.getY(), item.getX(), item.itemID);
+			item.Active(player.getplayercoordinateY(), player.getplayercoordinateX());
+			
+		}
+		
+		if (Keyboard::isKeyPressed(Keyboard::T)) // Выложить предмет
+		{
+			//	view.zoom(0.995);
+			if (player.inventory[item.itemID])
+			{
+				item.PlaceItem(player.getplayercoordinateY(), player.getplayercoordinateX());
+				player.ItemInsert(item.itemID);
+			}
+
+
+		}
+
 		if (Keyboard::isKeyPressed(Keyboard::Add)) // Приближение камеры
 		{
 			view.zoom(0.995);
@@ -223,7 +243,7 @@ int main()
 		ImGui::End(); // end window
 		////////////////////////////////////////////////////Im GUi	
 		
-		item.Active(player.getplayercoordinateX(), player.getplayercoordinateY()); //взаимодействие с игроком
+		 //взаимодействие с игроком
 
 		getplayercoordinateforview(player.getplayercoordinateX(), player.getplayercoordinateY());
 		player.Move(time, mapp.tempString);

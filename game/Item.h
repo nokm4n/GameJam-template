@@ -12,12 +12,16 @@ private:
 	int x, y, w, h;
 	
 public:
+	int itemID;
 	String File;
 	Image image;
 	Texture texture;
 	Sprite sprite;
-	Item(String F, int ItemX, int itemY, float ModelW, float ModelH, string* map);
+	Item(String F, int ItemX, int itemY, float ModelW, float ModelH, string* map, int itemId);
 	~Item();
-	void Active(int PLayerX, int PlayerY); //взаимодействие с игроком
+	void Active(int PlayerY, int PlayerX); //взаимодействие с игроком
+	void PlaceItem(int Y, int X);
+	int getX();
+	int getY();
 };
 

@@ -49,8 +49,8 @@ void Player::Move(float time, std::string map[25])
 	y += dy*time;
 	Collision(map);
 	speed = dx = dy = 0;
-	x1 = x; y1 = y;
-	x2 = x + 50; y2 = y + 50;
+	x1 = x/100; y1 = y/100;
+	x2 = (x + 50)/100; y2 = (y + 50)/100;
 	
 	sprite.setPosition(x, y);
 }
@@ -67,6 +67,9 @@ Player::Player(String F, float X, float Y, float W, float H)
 	sprite.setTexture(texture);
 	x = X; y = Y;
 	sprite.setTextureRect(IntRect(0, 48, w, h));
+
+	for (int i = 0; i < 10; i++)
+		inventory[i] = 0;
 }
 
 
@@ -138,11 +141,20 @@ bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
 }
 
 
-void Player::ItemCollect(int itemY, int itemX)
+void Player::ItemCollect(int itemY, int itemX, int itemID) //Подбирание предмета
 {
-	if (itemX == x1 / 100 && itemY == y1 / 100 && itemX == x2 / 100 && itemY == y2 / 100)
+	if (itemY/100 ==y1 && (itemY+50)/100==y2 && itemX/100==x1 && (itemX+50)/100==x2)
 	{
+		inventory[itemID] = true;
 		//Инвентарь или что то типо того
+		std::cout << "item added";
 	}
+	else
+		std::cout << "no item here";
+}
+
+void Player::ItemInsert(int itemID)
+{
+	inventory[itemID] = false;
 }
 
