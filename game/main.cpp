@@ -88,20 +88,22 @@ int main()
 	WayPoints[4][1] = 10;*/
 
 	int Target[2] = { 10, 10 }; // цель бота y/x
-	int tempTarget[2] = { 10, 10 }; //цель отображающаяся в ui
 	int DomI=0, DomJ=0; // Переменные для определения дома в котором находимся
 	int perem[3] = {1, 1, 0}; // Номер дома который вытаскиваем из рандома, стартовая позиция дома по У и Х
 	while (window.isOpen())
 	{
+
 		Vector2i pixelPos = Mouse::getPosition(window);//забираем коорд курсора
 		Vector2f pos = window.mapPixelToCoords(pixelPos);//переводим их в игровые (уходим от коорд окна)
+
+
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 		time = time/800;
 		Event event;
 		while (window.pollEvent(event))
 		{
-			ImGui::SFML::ProcessEvent(event);  			////////////////////////////////////////////////////Im GUi
+			ImGui::SFML::ProcessEvent(event); ////////////////////////////////////////////////////Im GUi
 			if (event.type == Event::Closed)
 				window.close();
 			
@@ -154,7 +156,7 @@ int main()
 			}
 
 		}
-		if (Keyboard::isKeyPressed(Keyboard::R)) // Выложить предмет
+		if (Keyboard::isKeyPressed(Keyboard::R)) // Выложить предмет 2
 		{
 			if (player.inventory[item2.itemID])
 			{
@@ -224,11 +226,9 @@ int main()
 			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 			mapp.AddToCopy();
 		}
-		ImGui::InputInt2("Bot smart movement coord y/x", tempTarget);
+		ImGui::InputInt2("Bot smart movement coord y/x", Target);
 		if (ImGui::Button("Bot start smart"))
 		{
-			Target[0] = tempTarget[0];
-			Target[1] = tempTarget[1];
 			npc.FindWay(Target[0], Target[1]);
 
 		}
