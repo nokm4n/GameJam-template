@@ -48,11 +48,11 @@ void Item::Active(int PlayerY, int PlayerX)
 {
 
 	{
-		if (PlayerX / 100 == x / 100 && PlayerY / 100 == y / 100 && (PlayerX + 50) / 100 == (x+w) / 100 && (PlayerY + 50) / 100 == (y+h) / 100)
+		if (PlayerX  >= x  && PlayerY  >= y  && (PlayerX)  <= (x+w)  && (PlayerY)  <= (y+h)   || (PlayerX+50 >= x && PlayerY >= y && (PlayerX+50) <= (x + w) && (PlayerY) <= (y + h)) )
 		{
 		//	std::cout << "item added";
 			sprite.setPosition(0, 0);
-			x = 0;
+			//x = 0;
 		}
 	}
 }
