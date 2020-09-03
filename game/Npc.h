@@ -17,8 +17,8 @@ private:
 	std::stack <int> targetX;
 	float dx, dy, w, h, speed, CurrentFrame = 0;
 	int dir = 0;// 1-left 2-right 3-down 4-up
-	int  MapCheck[34][34];
-	int MapTemp[34][34];
+	int  MapCheck[36][70];
+	int MapTemp[36][70];
 
 	
 public:

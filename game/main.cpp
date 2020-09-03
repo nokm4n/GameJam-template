@@ -69,6 +69,7 @@ int main()
 	bool flagOutside = true; // переменная для включения/выключения возможности войти/выйти из дома
 	int CounterWayPoints = 5; //Количество вэйпоинтов
 
+	
 	/*int** WayPoints = new int* [5];  // массив вейпоинтов
 	for (int i = 0; i < 5; i++)
 		WayPoints[i] = new int[2];

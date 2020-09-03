@@ -23,10 +23,17 @@ Npc::Npc(String F, float X, float Y, float W, float H, string *map)
 	sprite.setTextureRect(IntRect(32, 48, w, h));
 	LocationNpcX = x / 100;
 	LocationNpcY = y / 100;
-
+	for (int i = 0; i < 36; i++)
+	{
+		for (int j = 0; j < 36; j++)
+		{
+			cout << map[i][j];
+		}
+		std::cout << std::endl;
+	}
 	//кажись для коллизии, разобраться потом!!!!
-	for (int i = 0; i < 34; i++)
-		for (int j = 0; j < 34; j++)
+	for (int i = 0; i < 36; i++)
+		for (int j = 0; j < 36; j++)
 		{
 			if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
 			{
@@ -53,10 +60,12 @@ void Npc::IsActive(float time, float speed, std::string* map, bool* update) //Ос
 	LocationNpcY = (y / 100);
 	//std::cout << LocationNpcX << " " << LocationNpcY << std::endl;
 	//std::cout << x << " " << y << std::endl << std::endl;
+
 	if (*update)
 	{
-		for (int i = 0; i < 34; i++)
-			for (int j = 0; j < 34; j++)
+
+		for (int i = 0; i < 36; i++)
+			for (int j = 0; j < 36; j++)
 			{
 				if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
 				{
@@ -211,9 +220,9 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 	while (add == true)
 	{
-		for (int i = 1; i < 33; i++)
+		for (int i = 1; i < 36; i++)
 		{
-			for (int j = 1; j < 33; j++)
+			for (int j = 1; j < 36; j++)
 			{
 				if (MapCheck[i][j] == step1)
 				{
@@ -311,14 +320,14 @@ void Npc::ClearWay()
 
 void Npc::map()
 {
-	if (!targetX.empty())
+	/*if (!targetX.empty())
 		cout << targetY.top() << " " << targetX.top() << endl;
 	else
-		cout << "empty";
-/*
-	for (int i = 0; i < 34; i++)
+		cout << "empty";*/
+
+	for (int i = 0; i < 36; i++)
 	{
-		for (int j = 0; j < 34; j++)
+		for (int j = 0; j < 36; j++)
 		{
 			if (i == 17 && j == 17)
 			{
@@ -335,7 +344,7 @@ void Npc::map()
 				std::cout << 0 << MapCheck[i][j] << " ";
 		}
 		std::cout << std::endl;
-	}*/
+	}
 }
 
 

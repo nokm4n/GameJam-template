@@ -9,16 +9,27 @@ using namespace sf;
 
 DrawMap::DrawMap(string map)
 {
+	int maptest[3][3];
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+		{
+			maptest[i][j] = rand() % 5;
+		}
+	
+
 	int l = 0, k=0;
 	std::ifstream file(map);
-	while (!file.eof())
+	/*while (!file.eof())
 	{
 		file >> tempString[l];
 		l++;
 
-	}
-	for (int i = 0; i < 34; i++)
-		CopyMap[i] = tempString[i];
+	}*/
+	for (int i = 0; i < 36; i++) /// херня для задания карты
+		for (int j = 0; j < 36; j++)
+		{
+			tempString[i] += '7';
+		}
 
 	std::ifstream files("d.txt");  /////////////заполнение рандомного дома
 	while (!files.eof())
@@ -27,6 +38,20 @@ DrawMap::DrawMap(string map)
 		k++;
 
 	}
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+		{
+				for (int x = 0; x < 10; x++)
+					for (int y = 0; y < 10; y++)
+						tempString[i * 12 + x][j * 12 + y] = randDom[x][10*j+y];
+			/*	for (int x = 10; x < 12; x++)
+					for (int y = 10; y < 12; y++)
+						tempString[i * 12 + x][j * 12 + y] = '6';
+			
+			*/
+		}
+	for (int i = 0; i < 34; i++)
+		CopyMap[i] = tempString[i];
 		//tempString = sfString[k];
 	
 }
@@ -64,7 +89,7 @@ void DrawMap::ChangeDom(int ChangeDom, int startI, int startJ)
 
 void DrawMap::AddToCopy()
 {
-	for (int i = 0; i < 34; i++)
+	for (int i = 0; i < 36; i++)
 	{
 		CopyMap[i] = tempString[i];
 	}
@@ -74,8 +99,8 @@ void DrawMap::AddToCopy()
 void DrawMap::Drawsprite(RenderWindow & window, Sprite s_map)
 {
 	
-	for (int i = 0; i < 34; i++)
-		for (int j = 0; j < 34; j++)
+	for (int i = 0; i < 36; i++)
+		for (int j = 0; j < 36; j++)
 		{
 			switch (tempString[i][j])
 			{

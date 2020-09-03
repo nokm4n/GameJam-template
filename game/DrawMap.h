@@ -8,9 +8,9 @@ using namespace sf;
 class DrawMap
 {
 public:
-	string tempString[34];// сама карта
+	string tempString[36];// сама карта
 	string randDom[34];// для домиков на замену
-	string CopyMap[34];// копия карты, для того что бы помнить какой была до входа в дом
+	string CopyMap[36];// копия карты, для того что бы помнить какой была до входа в дом
 	//sf::String sfString[34];
 	DrawMap(string);
 	void AddToCopy(); // запоминание карты из темпа в копи
