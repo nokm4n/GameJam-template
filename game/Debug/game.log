@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  DrawMap.cpp
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\DrawMap.cpp(11,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\DrawMap.cpp(79,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
@@ -30,4 +31,29 @@ C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(180,1
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(262,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
 C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(263,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
   Создание кода...
+=======
+﻿  main.cpp
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(65,22): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(98,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(116,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(117,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(121,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(122,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(126,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(127,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(132,38): warning C4305: =: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(133,37): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(140,74): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(140,43): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(143,75): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(143,44): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(152,78): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(152,47): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(161,79): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(161,48): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(167,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(171,19): warning C4305: аргумент: усечение из "double" в "float"
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(245,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Никита\Desktop\прога\vs\GameJam-template\game\main.cpp(246,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+>>>>>>> parent of c0c38db... player hp add
   game.vcxproj -> C:\Users\Никита\Desktop\прога\vs\GameJam-template\Debug\game.exe

@@ -10,10 +10,9 @@ class Player
 private:
 	float x, y;
 	int x1, x2, y1, y2; //координаты углов игрока
-	int hp;
+	
 	
 public:
-	
 	bool inventory[10];
 	String File;
 	Image image;
@@ -22,7 +21,6 @@ public:
 	float dx, dy, w, h, speed;
 	float CurrentFrame = 0;
 	int dir; // 1-left 2-right 3-down 4-up
-	void setHp(int hp);
 	void Move(float, std::string[]);
 	void Collision(std::string[]);
 	void ItemCollect(int Y, int X, int intemID);

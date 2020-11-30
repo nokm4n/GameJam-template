@@ -253,7 +253,6 @@ int main()
 		}
 		if (ImGui::SliderInt("Hp", &hp, 0, 100))
 		{
-			player.setHp(hp);
 			lifeBarPlayer.update(hp);
 		}
 		if (ImGui::Button("Noise"))
