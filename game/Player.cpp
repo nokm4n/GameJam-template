@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Player.h"
+
 #define HeroX 50
 #define HeroY 50
 #define TILE 100
@@ -10,7 +11,7 @@ using namespace sf;
 using namespace std;
 
 
-void Player::Move(float time, std::string map[36])
+void Player::Move(float time, std::string map[MapSize])
 {
 	
 	switch (dir)
@@ -89,7 +90,7 @@ Player::~Player()
 {
 }
 
-void Player::Collision(std::string map[36])
+void Player::Collision(std::string map[MapSize])
 {
 	for (int i = y / TILE; i < (y + HeroY) / TILE; i++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32, которые мы окрашивали в 9 уроке. про условия читайте ниже.
 		for (int j = x / TILE; j < (x + HeroX) / TILE; j++)//икс делим на 32, тем самым получаем левый квадратик, с которым персонаж соприкасается. (он ведь больше размера 32*32, поэтому может одновременно стоять на нескольких квадратах). А j<(x + w) / 32 - условие ограничения координат по иксу. то есть координата самого правого квадрата, который соприкасается с персонажем. таким образом идем в цикле слева направо по иксу, проходя по от левого квадрата (соприкасающегося с героем), до правого квадрата (соприкасающегося с героем)
@@ -122,7 +123,7 @@ void Player::Collision(std::string map[36])
 		}
 }
 
-bool Player::PlayerInside(int MapSize, int* Domi, int* Domj, bool* Outside)
+bool Player::PlayerInside(int MapSise, int* Domi, int* Domj, bool* Outside)
 {
 
 	for(int i=0; i<MapSize; i++)

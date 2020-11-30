@@ -15,6 +15,7 @@
 #define ScreenY 720
 #define TILE 100
 
+
 const int HEIGHT_MAP = 34;//размер карты высота
 const int WIDTH_MAP = 34;//размер карты ширина 
 
@@ -34,6 +35,7 @@ void getplayercoordinateforview(float x, float y)
 
 int main()
 {
+	srand(time(NULL));
 	setlocale(LC_ALL, "Russian");
 	float CurrentFrame=0; // текущий кадр анимации
 	Font font;
@@ -57,6 +59,8 @@ int main()
 
 	LifeBar lifeBarPlayer("life2.png");
 	float scale = 1;
+
+	//view.zoom(3);
 
 	int hp = 0;
 	//menu(window);
@@ -226,6 +230,15 @@ int main()
 			update = true;
 			mapp.ChangeDom(perem[0], perem[1]*12, perem[2]*12); 
 			mapp.AddToCopy();
+		}
+		if (ImGui::Button("Reset"))
+		{
+			for(int i=0; i<3; i++)
+				for (int j = 0; j < 3; j++)
+				{
+					mapp.ChangeDom(rand() % 4, i * 12, j * 12);
+					mapp.AddToCopy();
+				}
 		}
 		ImGui::InputInt2("Bot smart movement coord y/x", Target);
 		if (ImGui::Button("Bot start smart"))

@@ -7,6 +7,7 @@
 #define HeroY 50
 #define TILE 100
 
+
 using namespace std;
 
 Npc::Npc(String F, float X, float Y, float W, float H, string *map)
@@ -25,15 +26,15 @@ Npc::Npc(String F, float X, float Y, float W, float H, string *map)
 	LocationNpcY = y / 100;
 	for (int i = 0; i < 36; i++)
 	{
-		for (int j = 0; j < 36; j++)
+		for (int j = 0; j < MapSize; j++)
 		{
 			cout << map[i][j];
 		}
 		std::cout << std::endl;
 	}
 	//кажись для коллизии, разобраться потом!!!!
-	for (int i = 0; i < 36; i++)
-		for (int j = 0; j < 36; j++)
+	for (int i = 0; i < MapSize; i++)
+		for (int j = 0; j < MapSize; j++)
 		{
 			if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
 			{
@@ -64,8 +65,8 @@ void Npc::IsActive(float time, float speed, std::string* map, bool* update) //Ос
 	if (*update)
 	{
 
-		for (int i = 0; i < 36; i++)
-			for (int j = 0; j < 36; j++)
+		for (int i = 0; i < MapSize; i++)
+			for (int j = 0; j < MapSize; j++)
 			{
 				if (map[i][j] == '1' || map[i][j] == '2' || map[i][j] == '0' || map[i][j] == '3' || map[i][j] == '4' || map[i][j] == '5') // стена, метим что нельзя пройти
 				{
@@ -220,9 +221,9 @@ void Npc::FindWay(int Ypos, int Xpos)
 	
 	while (add == true)
 	{
-		for (int i = 1; i < 36; i++)
+		for (int i = 1; i < MapSize; i++)
 		{
-			for (int j = 1; j < 36; j++)
+			for (int j = 1; j < MapSize; j++)
 			{
 				if (MapCheck[i][j] == step1)
 				{
@@ -325,9 +326,9 @@ void Npc::map()
 	else
 		cout << "empty";*/
 
-	for (int i = 0; i < 36; i++)
+	for (int i = 0; i < MapSize; i++)
 	{
-		for (int j = 0; j < 36; j++)
+		for (int j = 0; j < MapSize; j++)
 		{
 			if (i == 17 && j == 17)
 			{

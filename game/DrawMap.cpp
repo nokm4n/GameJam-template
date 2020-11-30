@@ -3,12 +3,12 @@
 #include <time.h>
 #define TILE 100
 
-
 using namespace std;
 using namespace sf;
 
 DrawMap::DrawMap(string map)
 {
+	srand(time(NULL));
 	int maptest[3][3];
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
@@ -25,8 +25,8 @@ DrawMap::DrawMap(string map)
 		l++;
 
 	}*/
-	for (int i = 0; i < 36; i++) /// херня для задания карты
-		for (int j = 0; j < 36; j++)
+	for (int i = 0; i < MapSize; i++) /// херня для задания карты
+		for (int j = 0; j < MapSize; j++)
 		{
 			tempString[i] += '7';
 		}
@@ -38,9 +38,10 @@ DrawMap::DrawMap(string map)
 		k++;
 
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++) // количество домов 
 		for (int j = 0; j < 3; j++)
 		{
+
 				for (int x = 0; x < 10; x++)
 					for (int y = 0; y < 10; y++)
 						tempString[i * 12 + x][j * 12 + y] = randDom[x][10*j+y];
@@ -50,9 +51,27 @@ DrawMap::DrawMap(string map)
 			
 			*/
 		}
-	for (int i = 0; i < 34; i++)
+	for (int i = 0; i < MapSize; i++)
 		CopyMap[i] = tempString[i];
 		//tempString = sfString[k];
+
+/*
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+		{
+			ChangeDom(rand() % 4, i * 12, j * 12);
+			AddToCopy();
+		}*/
+	/*ChangeDom(rand() % 5, 0 * 12, 0 * 12);
+	ChangeDom(rand() % 4, 0 * 12, 1 * 12);
+	ChangeDom(rand() % 6, 0 * 12, 2 * 12);
+	ChangeDom(rand() % 3, 1 * 12, 0 * 12);
+	ChangeDom(rand() % 2, 1 * 12, 1 * 12);
+	ChangeDom(rand() % 6, 1 * 12, 2 * 12);
+	ChangeDom(rand() % 5, 2 * 12, 0 * 12);
+	ChangeDom(rand() % 5, 2 * 12, 1 * 12);
+	ChangeDom(rand() % 6, 2 * 12, 2 * 12);
+	AddToCopy();*/
 	
 }
 void DrawMap::ChangeDom(int ChangeDom, int startI, int startJ)
@@ -89,7 +108,7 @@ void DrawMap::ChangeDom(int ChangeDom, int startI, int startJ)
 
 void DrawMap::AddToCopy()
 {
-	for (int i = 0; i < 36; i++)
+	for (int i = 0; i < MapSize; i++)
 	{
 		CopyMap[i] = tempString[i];
 	}
@@ -99,8 +118,8 @@ void DrawMap::AddToCopy()
 void DrawMap::Drawsprite(RenderWindow & window, Sprite s_map)
 {
 	
-	for (int i = 0; i < 36; i++)
-		for (int j = 0; j < 36; j++)
+	for (int i = 0; i < MapSize; i++)
+		for (int j = 0; j < MapSize; j++)
 		{
 			switch (tempString[i][j])
 			{

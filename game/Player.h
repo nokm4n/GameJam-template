@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
+#define MapSize 36
 
 using namespace sf;
 
@@ -28,7 +29,7 @@ public:
 	void ItemInsert(int itemID);
 	float getplayercoordinateX();
 	float getplayercoordinateY();
-	bool PlayerInside(int MapSize, int* DomY, int* DomYX, bool* Outside); // размер карты в блоках(сейчас 3 на 3), у и х координата для дома в котором находимся, переменная внутри/снаружи 
+	bool PlayerInside(int MapSise, int* DomY, int* DomYX, bool* Outside); // размер карты в блоках(сейчас 3 на 3), у и х координата для дома в котором находимся, переменная внутри/снаружи 
 	Player(String File, float PositionX, float PositionY, float ModelW, float ModelH);
 	~Player();
 };

@@ -4,7 +4,7 @@
 #include <stack> 
 #define NpcX 50 //npc tile size X
 #define NpcY 50 //npc tile size Y
-
+#define MapSize 36
 using namespace sf;
 
 class Npc
@@ -17,8 +17,8 @@ private:
 	std::stack <int> targetX;
 	float dx, dy, w, h, speed, CurrentFrame = 0;
 	int dir = 0;// 1-left 2-right 3-down 4-up
-	int  MapCheck[36][70];
-	int MapTemp[36][70];
+	int  MapCheck[MapSize][MapSize];
+	int MapTemp[MapSize][MapSize];
 
 	
 public:
